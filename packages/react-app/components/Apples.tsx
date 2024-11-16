@@ -66,7 +66,7 @@ export const Apples: React.FC<ApplesProps> = ({ onAppleClick }) => {
       {apples.map((apple) => (
         <img
           key={apple.id}
-          src="noun1.jpg" // Replace this with the correct path to the uploaded apple image
+          src="noun1-transparent.png" // Replace this with the correct path to the uploaded apple image
           alt="Apple"
           className={`apple ${apple.visible ? "visible" : ""}`}
           style={{

@@ -20,7 +20,7 @@ export default function Header() {
 
   return (
     <Disclosure as="nav">
-      <div className="relative w-full">
+      <div className="relative w-full z-50">
         <div className="mx-auto max-w-7xl px-2">
           <div className="relative flex h-16 justify-between items-center">
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
