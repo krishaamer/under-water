@@ -63,4 +63,12 @@
   body {
     @apply bg-background text-foreground;
   }
+  .apple {
+    opacity: 0;
+    transition: opacity 1s ease-in;
+  }
+
+  .apple.visible {
+    opacity: 1;
+  }
 }

@@ -29,9 +29,9 @@ export const NotificationForm: React.FC<NotificationFormProps> = ({
 
     try {
       await sendPushNotification({ walletClient, title, body });
-      setFeedback("help request sent successfully!");
+      setFeedback("help requested!");
     } catch (error) {
-      setFeedback("Failed to send notification.");
+      setFeedback("failezzzzz!");
     } finally {
       setLoading(false);
     }
@@ -70,7 +70,7 @@ export const NotificationForm: React.FC<NotificationFormProps> = ({
           {feedback && (
             <p
               className={`text-center mt-4 ${
-                feedback.includes("successfully")
+                feedback.includes("requested")
                   ? "text-green-500"
                   : "text-red-500"
               }`}
@@ -83,11 +83,12 @@ export const NotificationForm: React.FC<NotificationFormProps> = ({
       {feedback && (
         <div className="p-2 rounded-2xl shadow bg-white mt-2" id="my-friend">
           <p className="text-sm font-medium p-2">
+            <span className="text-sm font-bold">fren</span>
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarImage src="/avatar.png" alt="fren" />
+              <AvatarFallback>FR</AvatarFallback>
             </Avatar>
-            les gooo! click-click-clickk! rn bkk un-floooooded districts:{" "}
+            les gooo! saved districts:
             {clickedDistricts.length}/{districts.length}
           </p>
         </div>

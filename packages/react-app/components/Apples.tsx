@@ -4,6 +4,7 @@ interface Apple {
   id: number;
   x: number;
   y: number;
+  visible: boolean; // To track visibility
 }
 
 interface ApplesProps {
@@ -16,7 +17,7 @@ export const Apples: React.FC<ApplesProps> = ({ onAppleClick }) => {
   useEffect(() => {
     const generateApples = () => {
       const newApples: Apple[] = [];
-      const appleSize = 50; // The size of the apple in pixels
+      const appleSize = 60; // The size of the apple in pixels
       const screenWidth = window.innerWidth; // Screen width in pixels
       const screenHeight = window.innerHeight; // Screen height in pixels
 
@@ -27,9 +28,21 @@ export const Apples: React.FC<ApplesProps> = ({ onAppleClick }) => {
           id: i,
           x: (x / screenWidth) * 100,
           y: (y / screenHeight) * 100,
+          visible: false, // Initially hidden
         }); // Convert to percentage
       }
       setApples(newApples);
+
+      // Make apples visible progressively
+      newApples.forEach((_, index) => {
+        setTimeout(() => {
+          setApples((prev) =>
+            prev.map((apple, i) =>
+              i === index ? { ...apple, visible: true } : apple
+            )
+          );
+        }, index * 300); // Adjust delay for each apple
+      });
     };
 
     generateApples();
@@ -47,12 +60,13 @@ export const Apples: React.FC<ApplesProps> = ({ onAppleClick }) => {
           key={apple.id}
           src="noun1.jpg" // Replace this with the correct path to the uploaded apple image
           alt="Apple"
+          className={`apple ${apple.visible ? "visible" : ""}`}
           style={{
             position: "absolute",
             top: `${apple.y}%`,
             left: `${apple.x}%`,
-            width: "50px", // Adjust the size of the apple as needed
-            height: "50px",
+            width: "60px", // Adjust the size of the apple as needed
+            height: "60px",
             pointerEvents: "auto", // Allow clicks
             cursor: "pointer",
           }}

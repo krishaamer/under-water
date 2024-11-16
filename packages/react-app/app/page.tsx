@@ -13,8 +13,8 @@ export default function Home() {
   const [clickedDistricts, setClickedDistricts] = useState<string[]>([]);
 
   // Constants for Gozilla's size
-  const initialSize = 400; // Starting size of Gozilla in pixels
-  const sizeReduction = 20; // Reduction in size per clicked district
+  const initialSize = 800; // Starting size of Gozilla in pixels
+  const sizeReduction = 60; // Reduction in size per clicked district
   const minimumSize = 100; // Minimum size limit to prevent disappearing
 
   const gozillaSize = Math.max(
