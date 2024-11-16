@@ -39,7 +39,7 @@ export const NotificationForm: React.FC<NotificationFormProps> = ({
 
   return (
     <>
-      <div className="max-w-md mx-auto p-6 bg-white shadow rounded-2xl">
+      <div className="w-64 mx-auto p-6 bg-white shadow rounded-2xl">
         <Image
           src="/moo-deng.png"
           width={200}
@@ -52,7 +52,7 @@ export const NotificationForm: React.FC<NotificationFormProps> = ({
             <textarea
               value={body}
               onChange={(e) => setBody(e.target.value)}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-2xl shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm h-28"
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-2xl shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm h-24"
               placeholder="Enter notification body"
             ></textarea>
           </label>
@@ -65,7 +65,7 @@ export const NotificationForm: React.FC<NotificationFormProps> = ({
                 : "bg-blue-500 hover:bg-blue-600"
             } focus:outline-none focus:ring-2 focus:ring-blue-400`}
           >
-            {loading ? "sending..." : "notify all my frens!"}
+            {loading ? "asking for help..." : "notify all my frens!"}
           </button>
           {feedback && (
             <p
