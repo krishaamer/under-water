@@ -52,8 +52,6 @@ export const CuteGozilla: React.FC<GozillaProps> = ({ size }) => (
     viewBox="0 0 100 100"
     xmlns="http://www.w3.org/2000/svg"
   >
-    {/* Background */}
-    <rect width="100" height="100" fill="#87CEEB" />
 
     {/* Cute Godzilla Body */}
     <ellipse cx="50" cy="70" rx="25" ry="20" fill="#7FFF00" />

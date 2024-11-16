@@ -35,14 +35,14 @@ export default function ContractInteraction() {
       <button
         onClick={handleWrite}
         disabled={isPending}
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400"
+        className="bg-blue-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-700 disabled:bg-gray-400"
       >
-        {isPending ? "Processing..." : "Execute Contract"}
+        {isPending ? "processing..." : "buy carbon credits"}
       </button>
       {isSuccess && (
-        <p className="mt-2 text-green-600">Transaction Successful!</p>
+        <p className="mt-2 text-green-600">purchase successful!</p>
       )}
-      {error && <p className="mt-2 text-red-600">Error: {error.message}</p>}
+      {error && <p className="mt-2 text-red-600">error: {error.message}</p>}
     </div>
   );
 }

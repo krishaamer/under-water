@@ -29,7 +29,7 @@ export const NotificationForm: React.FC<NotificationFormProps> = ({
 
     try {
       await sendPushNotification({ walletClient, title, body });
-      setFeedback("help requested!");
+      setFeedback("");
     } catch (error) {
       setFeedback("failezzzzz!");
     } finally {

@@ -29,7 +29,7 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
 
     // Animate districts with an organic wave effect
     sortedDistricts.forEach((district, index) => {
-      const delay = Math.pow(index, 1.2) * 100; // Non-linear delay for wave effect
+      const delay = Math.pow(index, 0.8) * 100; // Non-linear delay for wave effect
       setTimeout(() => {
         setAnimatedDistricts((prev) => [...prev, district.id]);
       }, delay);
@@ -102,7 +102,7 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
                 animatedDistricts.includes(district.id)
               )}
               stroke="hsl(var(--border))"
-              strokeWidth="0.5"
+              strokeWidth="0.2"
               onMouseEnter={() => setHoveredDistrict(district.id)}
               onMouseLeave={() => setHoveredDistrict(null)}
               className="transition-colors duration-300 cursor-pointer"
