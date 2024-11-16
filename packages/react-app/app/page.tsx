@@ -16,6 +16,12 @@ export default function Home() {
       {!address && (
         <div className="h1">Please install Metamask and connect.</div>
       )}
+
+      {address && (
+        <>
+          <NotificationForm />
+        </>
+      )}
     </div>
   );
 }
