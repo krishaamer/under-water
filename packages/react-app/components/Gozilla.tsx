@@ -47,79 +47,79 @@ export const GozillaOne: React.FC<GozillaProps> = ({ size }) => (
 
 export const CuteGozilla: React.FC<GozillaProps> = ({ size }) => (
   <svg
-    width="400"
-    height="400"
-    viewBox="0 0 400 400"
+    width="100"
+    height="100"
+    viewBox="0 0 100 100"
     xmlns="http://www.w3.org/2000/svg"
   >
     {/* Background */}
-    <rect width="400" height="400" fill="#87CEEB" />
+    <rect width="100" height="100" fill="#87CEEB" />
 
     {/* Cute Godzilla Body */}
-    <ellipse cx="200" cy="280" rx="100" ry="80" fill="#7FFF00" />
+    <ellipse cx="50" cy="70" rx="25" ry="20" fill="#7FFF00" />
 
     {/* Cute Godzilla Head */}
-    <circle cx="200" cy="160" r="100" fill="#7FFF00" />
+    <circle cx="50" cy="40" r="25" fill="#7FFF00" />
 
     {/* Cute Godzilla Eyes */}
-    <circle cx="170" cy="140" r="20" fill="white" />
-    <circle cx="230" cy="140" r="20" fill="white" />
-    <circle cx="170" cy="140" r="10" fill="black" />
-    <circle cx="230" cy="140" r="10" fill="black" />
+    <circle cx="42.5" cy="35" r="5" fill="white" />
+    <circle cx="57.5" cy="35" r="5" fill="white" />
+    <circle cx="42.5" cy="35" r="2.5" fill="black" />
+    <circle cx="57.5" cy="35" r="2.5" fill="black" />
 
     {/* Cute Godzilla Mouth */}
     <path
-      d="M180 190 Q200 210 220 190"
+      d="M45 47.5 Q50 52.5 55 47.5"
       stroke="black"
-      strokeWidth="5"
+      strokeWidth="1"
       fill="none"
     />
 
     {/* Cute Godzilla Spikes */}
-    <polygon points="200,60 190,80 210,80" fill="#32CD32" />
-    <polygon points="170,70 160,90 180,90" fill="#32CD32" />
-    <polygon points="230,70 220,90 240,90" fill="#32CD32" />
+    <polygon points="50,15 47.5,20 52.5,20" fill="#32CD32" />
+    <polygon points="42.5,17.5 40,22.5 45,22.5" fill="#32CD32" />
+    <polygon points="57.5,17.5 55,22.5 60,22.5" fill="#32CD32" />
 
     {/* Cute Godzilla Arms */}
     <path
-      d="M120 250 Q100 270 110 300"
+      d="M30 62.5 Q25 67.5 27.5 75"
       stroke="#7FFF00"
-      strokeWidth="20"
+      strokeWidth="5"
       strokeLinecap="round"
     />
     <path
-      d="M280 250 Q300 270 290 300"
+      d="M70 62.5 Q75 67.5 72.5 75"
       stroke="#7FFF00"
-      strokeWidth="20"
+      strokeWidth="5"
       strokeLinecap="round"
     />
 
     {/* Cute Godzilla Legs */}
     <path
-      d="M160 350 Q150 380 170 400"
+      d="M40 87.5 Q37.5 95 42.5 100"
       stroke="#7FFF00"
-      strokeWidth="25"
+      strokeWidth="6.25"
       strokeLinecap="round"
     />
     <path
-      d="M240 350 Q250 380 230 400"
+      d="M60 87.5 Q62.5 95 57.5 100"
       stroke="#7FFF00"
-      strokeWidth="25"
+      strokeWidth="6.25"
       strokeLinecap="round"
     />
 
     {/* Cute Godzilla Tail */}
     <path
-      d="M200 350 Q150 370 100 340"
+      d="M50 87.5 Q37.5 92.5 25 85"
       stroke="#7FFF00"
-      strokeWidth="25"
+      strokeWidth="6.25"
       strokeLinecap="round"
       fill="none"
     />
 
     {/* Cute Atomic Breath */}
     <path
-      d="M200 190 Q230 180 260 170 Q240 180 260 190 Q240 200 260 210 Q230 200 200 190"
+      d="M50 47.5 Q57.5 45 65 42.5 Q60 45 65 47.5 Q60 50 65 52.5 Q57.5 50 50 47.5"
       fill="#00BFFF"
     >
       <animate

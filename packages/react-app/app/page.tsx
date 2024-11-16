@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { useWeb3 } from "@/contexts/useWeb3";
 import { GozillaOne, CuteGozilla } from "../components/Gozilla"; // Import both components
@@ -6,6 +6,7 @@ import { Bangkok } from "../components/Bangkok";
 import { Apples } from "../components/Apples";
 import { useEffect, useState } from "react";
 import { districts } from "../lib/districts";
+import ContractInteraction from "../components/Contract"; // Import the new component
 
 export default function Home() {
   const { address, getUserAddress } = useWeb3();
@@ -50,7 +51,10 @@ export default function Home() {
             <div className="foreground">
               <Apples onAppleClick={handleAppleClick} />
               {allDistrictsClicked ? (
-                <CuteGozilla size={gozillaSize} />
+                <>
+                  <CuteGozilla size={gozillaSize} />
+                  <ContractInteraction />
+                </>
               ) : (
                 <GozillaOne size={gozillaSize} />
               )}
