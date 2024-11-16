@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import { useWeb3 } from "@/contexts/useWeb3";
@@ -13,7 +14,6 @@ export default function Home() {
   const { address, getUserAddress } = useWeb3();
   const [clickedDistricts, setClickedDistricts] = useState<string[]>([]);
 
-  // Constants for Gozilla's size
   const initialSize = 800; // Starting size of Gozilla in pixels
   const sizeReduction = 60; // Reduction in size per clicked district
   const minimumSize = 100; // Minimum size limit to prevent disappearing
