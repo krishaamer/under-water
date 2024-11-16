@@ -7,9 +7,10 @@ import {
   useSwitchChain,
 } from "wagmi";
 import { parseUnits } from "viem";
-import { polygon } from "wagmi/chains";
+import { celo } from "wagmi/chains";
 
-const CONTRACT_ADDRESS = "0x7cb7c0484d4f2324f51d81e2368823c20aef8072" as const;
+// Updated contract address for Celo
+const CONTRACT_ADDRESS = "0x4242829d15434fea6606cf995f1bed68a18c37d1" as const;
 
 const ABI = [
   {
@@ -28,21 +29,21 @@ const ABI = [
   },
 ] as const;
 
-export default function Offset() {
+export default function OffsetCelo() {
   const { isConnected, chain } = useAccount();
   const { switchChainAsync } = useSwitchChain();
 
-  // Addresses and amount to swap
-  const fromToken = "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174" as const;
-  const poolToken = "0xD838290e877E0188a4A44700463419ED96c16107" as const;
-  const amountToSwap = parseUnits("10", 1);
+  // Updated Celo addresses
+  const fromToken = "0x765DE816845861e75A25fCA122bb6898B8B1282a" as const; // USDC on Celo
+  const poolToken = "0x02De4766C272abc10Bc88c220D214A26960a7e92" as const; // Pool token on Celo
+  const amountToSwap = parseUnits("1000", 0); // Using the example amount from the contract
 
   const { data: simulateData, error: prepareError } = useSimulateContract({
     address: CONTRACT_ADDRESS,
     abi: ABI,
     functionName: "autoOffsetExactInToken",
     args: [fromToken, poolToken, amountToSwap],
-    chainId: polygon.id,
+    chainId: celo.id,
   });
 
   const {
@@ -53,19 +54,19 @@ export default function Offset() {
     isSuccess,
   } = useWriteContract();
 
-  // Handle network switching
+  // Updated to switch to Celo network
   useEffect(() => {
-    const switchToPolygon = async () => {
-      if (isConnected && chain?.id !== polygon.id) {
+    const switchToCelo = async () => {
+      if (isConnected && chain?.id !== celo.id) {
         try {
-          await switchChainAsync({ chainId: polygon.id });
+          await switchChainAsync({ chainId: celo.id });
         } catch (error) {
           console.error("Failed to switch network", error);
         }
       }
     };
 
-    switchToPolygon();
+    switchToCelo();
   }, [isConnected, chain?.id, switchChainAsync]);
 
   const handleWrite = async () => {
@@ -89,14 +90,14 @@ export default function Offset() {
               !simulateData?.request ||
               isLoading ||
               !!prepareError ||
-              chain?.id !== polygon.id
+              chain?.id !== celo.id
             }
           >
-            {isLoading ? "processing..." : "offset carbon (polygon)"}
+            {isLoading ? "processing..." : "offset carbon (celo)"}
           </button>
           {isSuccess && data && (
             <a
-              href={`https://polygonscan.com/tx/${data}`}
+              href={`https://celoscan.io/tx/${data}`}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-blue-300 text-white px-4 ml-1 py-2 rounded-2xl hover:bg-blue-700"

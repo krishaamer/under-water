@@ -37,11 +37,11 @@ export default function ContractInteraction() {
         disabled={isPending}
         className="bg-blue-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-700 disabled:bg-gray-400"
       >
-        {isPending ? "processing..." : "buy carbon credits"}
+        {isPending ? "processing..." : "buy carbon credits (sepolia)"}
       </button>
       {isSuccess && data && (
         <a
-          href={`https://sepolia.basescan.org//tx/${data}`}
+          href={`https://sepolia.basescan.org/tx/${data}`}
           target="_blank"
           rel="noopener noreferrer"
           className="bg-blue-300 text-white px-4 ml-1 py-2 rounded-2xl hover:bg-blue-700"

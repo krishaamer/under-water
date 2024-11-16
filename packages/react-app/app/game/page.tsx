@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { districts } from "../../lib/districts";
 import ContractInteraction from "../../components/Contract";
 import Offset from "../../components/Offset";
+import OffsetCelo from "../../components/OffsetCelo";
 import { NotificationForm } from "../../components/Push";
 
 export default function Home() {
@@ -80,12 +81,14 @@ export default function Home() {
         {address && (
           <>
             <div className="foreground">
+              <OffsetCelo />
               <Apples onAppleClick={handleAppleClick} />
               {allDistrictsClicked ? (
                 <>
                   <CuteGozilla size={gozillaSize} />
                   <ContractInteraction />
                   <Offset />
+                  <OffsetCelo />
                 </>
               ) : (
                 <GozillaOne size={gozillaSize} />
