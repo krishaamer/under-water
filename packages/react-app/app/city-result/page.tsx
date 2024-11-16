@@ -1,7 +1,6 @@
-/* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import CityResult, { CityKey } from "../../components/CityResult";
 
@@ -29,10 +28,12 @@ export default function CityResultPage() {
   }
 
   return (
-    <CityResult
-      selectedCity={selectedCity}
-      onNavigate={handleNavigate}
-      onBack={handleBack}
-    />
+    <Suspense fallback={<div>Loading...</div>}>
+      <CityResult
+        selectedCity={selectedCity}
+        onNavigate={handleNavigate}
+        onBack={handleBack}
+      />
+    </Suspense>
   );
 }
