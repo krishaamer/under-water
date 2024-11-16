@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useConnect } from "wagmi";
 import { injected } from "wagmi/connectors";
-import { NotificationForm } from "./Push"
 
 export default function Header() {
   const [hideConnectBtn, setHideConnectBtn] = useState(false);
@@ -76,7 +75,6 @@ export default function Header() {
               >
                 Home
               </Disclosure.Button>
-              <NotificationForm />
             </div>
           </Disclosure.Panel>
         </>

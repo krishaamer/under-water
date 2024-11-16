@@ -1,21 +1,21 @@
 import { PushAPI } from "@pushprotocol/restapi";
-import { useWalletClient } from "wagmi";
 
 interface NotificationPayload {
   title: string;
   body: string;
+  walletClient: any;
 }
 
 export const sendPushNotification = async ({
   title,
   body,
+  walletClient,
 }: NotificationPayload): Promise<void> => {
   try {
-    // Use the wallet client from wagmi
-    const { data: walletClient } = useWalletClient();
-
     if (!walletClient) {
-      throw new Error("No wallet client available. Ensure the wallet is connected.");
+      throw new Error(
+        "No wallet client available. Ensure the wallet is connected."
+      );
     }
 
     // Initialize Push Protocol user
