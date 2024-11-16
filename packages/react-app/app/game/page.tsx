@@ -81,11 +81,11 @@ export default function Home() {
           <>
             <div className="foreground">
               <Apples onAppleClick={handleAppleClick} />
-              <Offset />
               {allDistrictsClicked ? (
                 <>
                   <CuteGozilla size={gozillaSize} />
                   <ContractInteraction />
+                  <Offset />
                 </>
               ) : (
                 <GozillaOne size={gozillaSize} />

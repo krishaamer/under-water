@@ -99,16 +99,14 @@ export default function Offset() {
             {isLoading ? "Processing..." : "Offset Carbon"}
           </button>
           {isSuccess && data && (
-            <div>
-              Transaction Hash:{" "}
-              <a
-                href={`https://polygonscan.com/tx/${data}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {data}
-              </a>
-            </div>
+            <a
+              href={`https://polygonscan.com/tx/${data}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-blue-300 text-white px-4 ml-1 py-2 rounded-2xl hover:bg-blue-700"
+            >
+              See TX
+            </a>
           )}
           {(prepareError || writeError) && (
             <div style={{ color: "red" }}>
