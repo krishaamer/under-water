@@ -4,9 +4,9 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex gap-5 flex-col">
+    <div className="flex gap-7 flex-col justify-between">
       <Image
-        className="block h-[5.3rem] w-auto sm:block lg:block "
+        className="block h-[6.3rem] w-auto sm:block lg:block "
         src="/logo.svg"
         width="50"
         height="30"
@@ -18,7 +18,7 @@ export default function Home() {
         </div>
         <Link
           href="/landing-two"
-          className="bg-colors-secondaryButton p-3 w-full text-white text-center font-bold "
+          className="bg-colors-secondaryButton p-4 w-full text-white text-center font-bold text-lg rounded-md "
         >
           START
         </Link>

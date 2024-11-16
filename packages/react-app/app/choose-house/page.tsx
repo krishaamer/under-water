@@ -40,6 +40,7 @@ export default function ChooseHouse() {
             <option value="shanghai">Shanghai</option>
             <option value="mexicoCity">Mexico City</option>
             <option value="seattle">Seattle</option>
+            <option value="mumbai">Mumbai</option>
           </select>
 
           <button
