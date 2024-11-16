@@ -81,7 +81,6 @@ export default function Home() {
         {address && (
           <>
             <div className="foreground">
-              <OffsetCelo />
               <Apples onAppleClick={handleAppleClick} />
               {allDistrictsClicked ? (
                 <>
