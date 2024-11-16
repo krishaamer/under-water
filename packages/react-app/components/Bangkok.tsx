@@ -2,6 +2,8 @@
 
 import React, { useState, useRef } from "react";
 import { districts } from "../lib/districts"
+import { NotificationForm } from "./Push";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface BangkokProps {
   clickedDistricts: string[];
@@ -44,11 +46,20 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-100 z-0">
-      <div className="absolute top-4 left-4 bg-white p-2 rounded shadow">
-        <p className="text-sm font-medium">
-          un-floooooded districts: {clickedDistricts.length}/{districts.length}
-        </p>
+      <div className="absolute top-4 left-4 p-2 rounded-2xl shadow bg-pink-100">
+        <NotificationForm />
+        <div className="p-2 rounded-2xl shadow bg-white mt-2">
+          <p className="text-sm font-medium p-2">
+            <Avatar>
+              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            les gooo! click-click-clickk! rn bkk un-floooooded districts:{" "}
+            {clickedDistricts.length}/{districts.length}
+          </p>
+        </div>
       </div>
+
       <svg
         ref={svgRef}
         viewBox="0 0 500 400"

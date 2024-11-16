@@ -1,7 +1,6 @@
 "use client";
 
 import { useWeb3 } from "@/contexts/useWeb3";
-import { NotificationForm } from "../components/Push";
 import { GozillaOne, CuteGozilla } from "../components/Gozilla"; // Import both components
 import { Bangkok } from "../components/Bangkok";
 import { Apples } from "../components/Apples";
@@ -55,7 +54,6 @@ export default function Home() {
               ) : (
                 <GozillaOne size={gozillaSize} />
               )}
-              <NotificationForm />
             </div>
           </>
         )}
