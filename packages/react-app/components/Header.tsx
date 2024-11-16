@@ -1,15 +1,12 @@
 import { Disclosure } from "@headlessui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useConnect } from "wagmi";
 import { injected } from "wagmi/connectors";
-import { useWeb3 } from "@/contexts/useWeb3";
 
 export default function Header() {
   const [hideConnectBtn, setHideConnectBtn] = useState(false);
   const { connect } = useConnect();
-  const { address } = useWeb3();
 
   useEffect(() => {
     if (window.ethereum && window.ethereum.isMiniPay) {
