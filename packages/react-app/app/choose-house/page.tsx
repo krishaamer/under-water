@@ -18,7 +18,7 @@ export default function ChooseHouse() {
   return (
     <div className="flex flex-col items-center px-3 gap-5 min-h-screen">
       <div className="justify-center text-center items-center font-bold leading-relaxed text-colors-secondary text-3xl backdrop-blur-md">
-        {"Choose Your City's Future"}
+        Choose Your City Future
       </div>
 
       <select
