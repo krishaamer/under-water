@@ -46,7 +46,7 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
     <div className="fixed inset-0 flex items-center justify-center bg-gray-100 z-0">
       <div className="absolute top-4 left-4 bg-white p-2 rounded shadow">
         <p className="text-sm font-medium">
-          Clicked districts: {clickedDistricts.length}/{districts.length}
+          un-floooooded districts: {clickedDistricts.length}/{districts.length}
         </p>
       </div>
       <svg

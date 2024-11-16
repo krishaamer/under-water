@@ -4,10 +4,12 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useConnect } from "wagmi";
 import { injected } from "wagmi/connectors";
+import { useWeb3 } from "@/contexts/useWeb3";
 
 export default function Header() {
   const [hideConnectBtn, setHideConnectBtn] = useState(false);
   const { connect } = useConnect();
+  const { address } = useWeb3();
 
   useEffect(() => {
     if (window.ethereum && window.ethereum.isMiniPay) {
@@ -32,6 +34,7 @@ export default function Header() {
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            {!address && <div className="h1">Please connect your wallet</div>}
             {!hideConnectBtn && (
               <ConnectButton
                 showBalance={{

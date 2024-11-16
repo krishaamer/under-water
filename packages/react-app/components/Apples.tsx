@@ -16,10 +16,18 @@ export const Apples: React.FC<ApplesProps> = ({ onAppleClick }) => {
   useEffect(() => {
     const generateApples = () => {
       const newApples: Apple[] = [];
+      const appleSize = 50; // The size of the apple in pixels
+      const screenWidth = window.innerWidth; // Screen width in pixels
+      const screenHeight = window.innerHeight; // Screen height in pixels
+
       for (let i = 0; i < 18; i++) {
-        const x = Math.random() * 90; // Random horizontal position (0-90% of the screen width)
-        const y = Math.random() * 90; // Random vertical position (0-90% of the screen height)
-        newApples.push({ id: i, x, y });
+        const x = Math.random() * (screenWidth - appleSize); // Ensure apple stays within screen horizontally
+        const y = Math.random() * (screenHeight - appleSize); // Ensure apple stays within screen vertically
+        newApples.push({
+          id: i,
+          x: (x / screenWidth) * 100,
+          y: (y / screenHeight) * 100,
+        }); // Convert to percentage
       }
       setApples(newApples);
     };

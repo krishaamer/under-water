@@ -2,7 +2,7 @@
 
 import { useWeb3 } from "@/contexts/useWeb3";
 import { NotificationForm } from "../components/Push";
-import { GozillaOne } from "../components/Gozilla";
+import { GozillaOne, CuteGozilla } from "../components/Gozilla"; // Import both components
 import { Bangkok } from "../components/Bangkok";
 import { Apples } from "../components/Apples";
 import { useEffect, useState } from "react";
@@ -11,6 +11,16 @@ import { districts } from "../lib/districts";
 export default function Home() {
   const { address, getUserAddress } = useWeb3();
   const [clickedDistricts, setClickedDistricts] = useState<string[]>([]);
+
+  // Constants for Gozilla's size
+  const initialSize = 400; // Starting size of Gozilla in pixels
+  const sizeReduction = 20; // Reduction in size per clicked district
+  const minimumSize = 100; // Minimum size limit to prevent disappearing
+
+  const gozillaSize = Math.max(
+    initialSize - clickedDistricts.length * sizeReduction,
+    minimumSize
+  );
 
   useEffect(() => {
     getUserAddress();
@@ -25,23 +35,26 @@ export default function Home() {
     }
   };
 
+  const allDistrictsClicked = clickedDistricts.length === districts.length;
 
   return (
     <div className="relative w-screen h-screen">
-      {/* Bangkok map as the interactive layer */}
+      <div>
+        <h1 className="text-2xl">collect all CO2 to de-flood Bangkok</h1>
+      </div>
       <div className="absolute inset-0 z-0">
         <Bangkok clickedDistricts={clickedDistricts} />
       </div>
-
-      {/* Foreground content */}
       <div className="absolute inset-0 flex flex-col justify-center items-center h-full z-10">
-        {!address && <div className="h1">Please connect your wallet</div>}
-
         {address && (
           <>
             <div className="foreground">
               <Apples onAppleClick={handleAppleClick} />
-              <GozillaOne />
+              {allDistrictsClicked ? (
+                <CuteGozilla size={gozillaSize} />
+              ) : (
+                <GozillaOne size={gozillaSize} />
+              )}
               <NotificationForm />
             </div>
           </>
