@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface Apple {
   id: number;
@@ -6,7 +6,11 @@ interface Apple {
   y: number;
 }
 
-export const Apples: React.FC = () => {
+interface ApplesProps {
+  onAppleClick: (appleId: number) => void; // Callback to notify about apple clicks
+}
+
+export const Apples: React.FC<ApplesProps> = ({ onAppleClick }) => {
   const [apples, setApples] = useState<Apple[]>([]);
 
   useEffect(() => {
@@ -23,6 +27,11 @@ export const Apples: React.FC = () => {
     generateApples();
   }, []);
 
+  const handleAppleClick = (id: number) => {
+    setApples((prev) => prev.filter((apple) => apple.id !== id)); // Remove clicked apple
+    onAppleClick(id); // Notify parent about the click
+  };
+
   return (
     <div>
       {apples.map((apple) => (
@@ -36,8 +45,10 @@ export const Apples: React.FC = () => {
             left: `${apple.x}%`,
             width: "50px", // Adjust the size of the apple as needed
             height: "50px",
-            pointerEvents: "none", // Ensure apples don't interfere with user interactions
+            pointerEvents: "auto", // Allow clicks
+            cursor: "pointer",
           }}
+          onClick={() => handleAppleClick(apple.id)} // Handle click event
         />
       ))}
     </div>
