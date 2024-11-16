@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Disclosure } from "@headlessui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useEffect, useState } from "react";
