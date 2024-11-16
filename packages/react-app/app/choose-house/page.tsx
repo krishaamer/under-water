@@ -41,7 +41,7 @@ export default function ChooseHouse() {
         }`}
         disabled={!selectedCity}
       >
-        Check Your City's Future
+        Check Your City Future
       </button>
     </div>
   );
