@@ -4,6 +4,7 @@ interface Apple {
   id: number;
   x: number;
   y: number;
+  size: number; // Size of the apple in pixels
   visible: boolean; // To track visibility
 }
 
@@ -17,7 +18,6 @@ export const Apples: React.FC<ApplesProps> = ({ onAppleClick }) => {
   useEffect(() => {
     const generateApples = () => {
       const newApples: Apple[] = [];
-      const appleSize = 60; // The size of the apple in pixels
       const screenWidth = window.innerWidth; // Screen width in pixels
       const screenHeight = window.innerHeight; // Screen height in pixels
 
@@ -30,12 +30,14 @@ export const Apples: React.FC<ApplesProps> = ({ onAppleClick }) => {
       const minY = (screenHeight - centerHeight) / 2;
 
       for (let i = 0; i < 18; i++) {
-        const x = minX + Math.random() * (centerWidth - appleSize); // Random x within center area
-        const y = minY + Math.random() * (centerHeight - appleSize); // Random y within center area
+        const size = Math.random() * (80 - 50) + 50; // Random size between 50 and 80 pixels
+        const x = minX + Math.random() * (centerWidth - size); // Random x within center area
+        const y = minY + Math.random() * (centerHeight - size); // Random y within center area
         newApples.push({
           id: i,
           x: (x / screenWidth) * 100,
           y: (y / screenHeight) * 100,
+          size,
           visible: false, // Initially hidden
         }); // Convert to percentage
       }
@@ -73,8 +75,8 @@ export const Apples: React.FC<ApplesProps> = ({ onAppleClick }) => {
             position: "absolute",
             top: `${apple.y}%`,
             left: `${apple.x}%`,
-            width: "60px", // Adjust the size of the apple as needed
-            height: "60px",
+            width: `${apple.size}px`, // Dynamic size
+            height: `${apple.size}px`, // Dynamic size
             pointerEvents: "auto", // Allow clicks
             cursor: "pointer",
           }}
