@@ -2,6 +2,7 @@
 
 import { useWeb3 } from "@/contexts/useWeb3";
 import { NotificationForm } from "../components/Push";
+import { GozillaOne } from "../components/Gozilla";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -13,12 +14,11 @@ export default function Home() {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      {!address && (
-        <div className="h1">Please install Metamask and connect.</div>
-      )}
+      {!address && <div className="h1">Please connect your wallet</div>}
 
       {address && (
         <>
+          <GozillaOne />
           <NotificationForm />
         </>
       )}

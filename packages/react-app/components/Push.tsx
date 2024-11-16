@@ -30,12 +30,8 @@ export const NotificationForm: React.FC = () => {
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h1 className="text-2xl font-semibold text-center mb-6">
-        Send Notification
-      </h1>
       <div className="space-y-4">
         <label className="block">
-          <span className="text-gray-700 font-medium">Title:</span>
           <input
             type="text"
             value={title}
@@ -45,7 +41,6 @@ export const NotificationForm: React.FC = () => {
           />
         </label>
         <label className="block">
-          <span className="text-gray-700 font-medium">Body:</span>
           <textarea
             value={body}
             onChange={(e) => setBody(e.target.value)}
