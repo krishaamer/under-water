@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="flex gap-7 flex-col justify-between">
       <Image
-        className="block h-[6.3rem] w-auto sm:block lg:block "
+        className="block h-[7rem] w-auto sm:block lg:block "
         src="/logo.svg"
         width="50"
         height="30"

@@ -56,7 +56,7 @@ export default function Home() {
 
   return (
     <div className="relative w-screen h-screen">
-      <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-[9999] p-4 rounded-xl shadow bg-white">
+      <div className="fixed  top-13 right-0 transform -translate-x-1/2 z-[9999] p-2 rounded-xl shadow bg-white w-1/3">
         <p className="text-lg font-semibold text-center">
           Average Temperature Change: {temperatureChange}°C
         </p>
