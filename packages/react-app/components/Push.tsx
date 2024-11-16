@@ -29,7 +29,7 @@ export const NotificationForm: React.FC<NotificationFormProps> = ({
 
     try {
       await sendPushNotification({ walletClient, title, body });
-      setFeedback("");
+      setFeedback("!!!");
     } catch (error) {
       setFeedback("failezzzzz!");
     } finally {
@@ -41,7 +41,7 @@ export const NotificationForm: React.FC<NotificationFormProps> = ({
     <>
       <div className="w-72 mx-auto p-4 bg-white shadow rounded-2xl">
         <Image
-          src="/moo-deng.png"
+          src={feedback ? "/moo-deng-glasses.jpg" : "/moo-deng.png"}
           width={150}
           height={150}
           alt="Baby Hippo Moo Deng"
@@ -70,8 +70,8 @@ export const NotificationForm: React.FC<NotificationFormProps> = ({
           {feedback && (
             <p
               className={`text-center mt-4 ${
-                feedback.includes("requested")
-                  ? "text-green-500"
+                feedback.includes("!!!")
+                  ? "text-green-500 hidden"
                   : "text-red-500"
               }`}
             >

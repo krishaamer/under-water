@@ -21,9 +21,17 @@ export const Apples: React.FC<ApplesProps> = ({ onAppleClick }) => {
       const screenWidth = window.innerWidth; // Screen width in pixels
       const screenHeight = window.innerHeight; // Screen height in pixels
 
+      // Define the center area dimensions (50% of the screen size)
+      const centerWidth = screenWidth * 0.5; // Center area is 50% of screen width
+      const centerHeight = screenHeight * 0.5; // Center area is 50% of screen height
+
+      // Calculate minimum x and y positions to center the apples
+      const minX = (screenWidth - centerWidth) / 2;
+      const minY = (screenHeight - centerHeight) / 2;
+
       for (let i = 0; i < 18; i++) {
-        const x = Math.random() * (screenWidth - appleSize); // Ensure apple stays within screen horizontally
-        const y = Math.random() * (screenHeight - appleSize); // Ensure apple stays within screen vertically
+        const x = minX + Math.random() * (centerWidth - appleSize); // Random x within center area
+        const y = minY + Math.random() * (centerHeight - appleSize); // Random y within center area
         newApples.push({
           id: i,
           x: (x / screenWidth) * 100,

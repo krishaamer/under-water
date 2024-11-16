@@ -69,9 +69,11 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
       return "hsl(0, 80%, 50%)"; // Red
     }
     return isAnimated
-      ? "hsl(0, 0%, 85%)" // Lighter gray for animated districts
-      : "hsl(0, 0%, 60%)"; // Medium gray for default
+      ? "hsl(210, 100%, 96%)" // Very light blue for animated districts
+      : "hsl(210, 100%, 98%)"; // Even lighter blue for default
   };
+
+
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-100 z-0">
