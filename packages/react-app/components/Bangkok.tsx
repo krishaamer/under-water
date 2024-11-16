@@ -73,10 +73,8 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
       : "hsl(210, 100%, 98%)"; // Even lighter blue for default
   };
 
-
-
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-100 z-0">
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-100">
       <div className="absolute top-4 left-4 p-2 rounded-2xl shadow bg-pink-100">
         <NotificationForm clickedDistricts={clickedDistricts} />
       </div>

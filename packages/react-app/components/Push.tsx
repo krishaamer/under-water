@@ -39,7 +39,7 @@ export const NotificationForm: React.FC<NotificationFormProps> = ({
 
   return (
     <>
-      <div className="w-72 mx-auto p-4 bg-white shadow rounded-2xl">
+      <div className="w-72 mx-auto p-4 bg-white shadow rounded-2xl z-30 pointer-events-auto">
         <Image
           src={feedback ? "/moo-deng-glasses.jpg" : "/moo-deng.png"}
           width={150}

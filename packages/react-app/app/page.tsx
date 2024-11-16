@@ -39,10 +39,10 @@ export default function Home() {
 
   return (
     <div className="relative w-screen h-screen">
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-10 pointer-events-auto">
         <Bangkok clickedDistricts={clickedDistricts} />
       </div>
-      <div className="absolute inset-0 flex flex-col justify-center items-center h-full z-10">
+      <div className="absolute inset-0 flex flex-col justify-center items-center h-full z-20">
         {address && (
           <>
             <div className="foreground">
