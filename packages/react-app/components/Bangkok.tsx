@@ -24,14 +24,15 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
       return { ...district, minY };
     });
 
-    // Sort districts by their vertical position (descending order)
+    // Sort districts by vertical position (descending order)
     const sortedDistricts = districtsWithY.sort((a, b) => b.minY - a.minY);
 
-    // Animate districts based on their position
+    // Animate districts with an organic wave effect
     sortedDistricts.forEach((district, index) => {
+      const delay = Math.pow(index, 1.2) * 100; // Non-linear delay for wave effect
       setTimeout(() => {
         setAnimatedDistricts((prev) => [...prev, district.id]);
-      }, index * (2000 / districts.length)); // Spread animations over 2 seconds
+      }, delay);
     });
   }, []);
 
@@ -102,7 +103,7 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
               strokeWidth="1"
               onMouseEnter={() => setHoveredDistrict(district.id)}
               onMouseLeave={() => setHoveredDistrict(null)}
-              className="transition-colors duration-200 cursor-pointer"
+              className="transition-colors duration-300 cursor-pointer"
               style={{ pointerEvents: "all" }}
             />
           ))}
