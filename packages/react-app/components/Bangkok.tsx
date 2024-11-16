@@ -3,26 +3,19 @@ import { districts } from "../lib/districts";
 
 interface BangkokProps {
   clickedDistricts: string[];
+  onDistrictClick: (districtId: string) => void;
 }
 
-export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
+export const Bangkok: React.FC<BangkokProps> = ({
+  clickedDistricts,
+  onDistrictClick,
+}) => {
   const [hoveredDistrict, setHoveredDistrict] = useState<string | null>(null);
   const [animatedDistricts, setAnimatedDistricts] = useState<string[]>([]);
   const [transform, setTransform] = useState({ x: 0, y: 0, scale: 1 });
   const [isDragging, setIsDragging] = useState(false);
   const [startDragPosition, setStartDragPosition] = useState({ x: 0, y: 0 });
-  const [temperatureChange, setTemperatureChange] = useState<number>(2.0); // Base change in °C
   const svgRef = useRef<SVGSVGElement>(null);
-
-  useEffect(() => {
-    // Update average temperature change based on clickedDistricts
-    const baseChange = 2.0; // Base average change in °C
-    const reductionPerClick = 0.05; // Reduction per district clicked
-    const newTemperatureChange =
-      baseChange - clickedDistricts.length * reductionPerClick;
-
-    setTemperatureChange(parseFloat(newTemperatureChange.toFixed(2))); // Set new temperature change
-  }, [clickedDistricts]);
 
   useEffect(() => {
     const districtsWithY = districts.map((district) => {
@@ -81,44 +74,38 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
   };
 
   return (
-    <div className="relative">
-      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-white px-6 py-2 rounded shadow-md">
-        <p className="text-lg font-semibold text-center">
-          Average Temperature Change: {temperatureChange}°C
-        </p>
-      </div>
-      <svg
-        ref={svgRef}
-        viewBox="0 0 500 400"
-        className="w-full h-full"
-        style={{ cursor: isDragging ? "grabbing" : "grab" }}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
+    <svg
+      ref={svgRef}
+      viewBox="0 0 500 400"
+      className="w-full h-full"
+      style={{ cursor: isDragging ? "grabbing" : "grab" }}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+    >
+      <g
+        transform={`translate(${transform.x}, ${transform.y}) scale(${transform.scale})`}
       >
-        <g
-          transform={`translate(${transform.x}, ${transform.y}) scale(${transform.scale})`}
-        >
-          {districts.map((district) => (
-            <path
-              key={district.id}
-              d={district.d}
-              fill={getDistrictColor(
-                district.climateImpact,
-                clickedDistricts.includes(district.id),
-                animatedDistricts.includes(district.id)
-              )}
-              stroke="hsl(var(--border))"
-              strokeWidth="0.2"
-              onMouseEnter={() => setHoveredDistrict(district.id)}
-              onMouseLeave={() => setHoveredDistrict(null)}
-              className="transition-colors duration-300 cursor-pointer"
-              style={{ pointerEvents: "all" }}
-            />
-          ))}
-        </g>
-      </svg>
-    </div>
+        {districts.map((district) => (
+          <path
+            key={district.id}
+            d={district.d}
+            fill={getDistrictColor(
+              district.climateImpact,
+              clickedDistricts.includes(district.id),
+              animatedDistricts.includes(district.id)
+            )}
+            stroke="hsl(var(--border))"
+            strokeWidth="0.2"
+            onMouseEnter={() => setHoveredDistrict(district.id)}
+            onMouseLeave={() => setHoveredDistrict(null)}
+            onClick={() => onDistrictClick(district.id)}
+            className="transition-colors duration-300 cursor-pointer"
+            style={{ pointerEvents: "all" }}
+          />
+        ))}
+      </g>
+    </svg>
   );
 };

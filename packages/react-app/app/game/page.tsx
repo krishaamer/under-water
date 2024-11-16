@@ -13,6 +13,7 @@ import { NotificationForm } from "../../components/Push";
 export default function Home() {
   const { address, getUserAddress } = useWeb3();
   const [clickedDistricts, setClickedDistricts] = useState<string[]>([]);
+  const [temperatureChange, setTemperatureChange] = useState<number>(2.0); // Base temperature change
 
   const initialSize = 800; // Starting size of Gozilla in pixels
   const sizeReduction = 60; // Reduction in size per clicked district
@@ -27,6 +28,16 @@ export default function Home() {
     getUserAddress();
   }, [getUserAddress]);
 
+  useEffect(() => {
+    // Update temperature change based on clicked districts
+    const reductionPerClick = 0.05; // Temperature reduction per click
+    const newTemperatureChange = Math.max(
+      2.0 - clickedDistricts.length * reductionPerClick,
+      0
+    ); // Prevent going below 0
+    setTemperatureChange(parseFloat(newTemperatureChange.toFixed(2)));
+  }, [clickedDistricts]);
+
   const handleAppleClick = (appleId: number) => {
     const districtId = districts[appleId % districts.length]?.id; // Use modulo for cycling through districts
     if (districtId) {
@@ -40,7 +51,15 @@ export default function Home() {
 
   return (
     <div className="relative w-screen h-screen">
-      <div className="fixed top-4 left-4 z-[9999] p-2 rounded-2xl shadow bg-pink-100">
+      {/* Temperature Display */}
+      <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-[9999] p-4 rounded-xl shadow bg-white">
+        <p className="text-lg font-semibold text-center">
+          Average Temperature Change: {temperatureChange}°C
+        </p>
+      </div>
+
+      {/* Notification Form */}
+      <div className="fixed top-16 left-4 z-[9999] p-2 rounded-2xl shadow bg-pink-100">
         <NotificationForm clickedDistricts={clickedDistricts} />
       </div>
 
