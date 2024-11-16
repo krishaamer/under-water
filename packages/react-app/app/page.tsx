@@ -6,6 +6,7 @@ import { GozillaOne } from "../components/Gozilla";
 import { Bangkok } from "../components/Bangkok";
 import { Apples } from "../components/Apples";
 import { useEffect, useState } from "react";
+import { districts } from "../lib/districts";
 
 export default function Home() {
   const { address, getUserAddress } = useWeb3();
@@ -16,11 +17,14 @@ export default function Home() {
   }, []);
 
   const handleAppleClick = (appleId: number) => {
-    const districtId = `district_${appleId}`; // Map apple ID to a fake district ID
-    setClickedDistricts((prev) =>
-      prev.includes(districtId) ? prev : [...prev, districtId]
-    );
+    const districtId = districts[appleId % districts.length]?.id; // Use modulo for cycling through districts
+    if (districtId) {
+      setClickedDistricts((prev) =>
+        prev.includes(districtId) ? prev : [...prev, districtId]
+      );
+    }
   };
+
 
   return (
     <div className="relative w-screen h-screen">
