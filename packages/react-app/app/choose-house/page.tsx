@@ -14,7 +14,7 @@ export default function ChooseHouse() {
   };
 
   const handleNavigate = () => {
-    window.location.href = "/report";
+    window.location.href = "/game";
   };
 
   const handleBack = () => {
@@ -44,18 +44,22 @@ export default function ChooseHouse() {
 
           <button
             onClick={handleCheckCity}
-            className="bg-colors-secondaryButton p-3 w-full text-white text-center font-bold rounded-md"
+            className={`bg-colors-secondaryButton p-3 w-full text-white text-center font-bold rounded-md ${
+              !selectedCity ? "opacity-50 cursor-not-allowed" : ""
+            }`}
             disabled={!selectedCity}
           >
             Check Your City Future
           </button>
         </>
       ) : (
-        <CityResult
-          selectedCity={selectedCity as CityKey}
-          onNavigate={handleNavigate}
-          onBack={handleBack}
-        />
+        selectedCity && (
+          <CityResult
+            selectedCity={selectedCity}
+            onNavigate={handleNavigate}
+            onBack={handleBack}
+          />
+        )
       )}
     </div>
   );
