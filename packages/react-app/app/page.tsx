@@ -4,6 +4,7 @@ import { useWeb3 } from "@/contexts/useWeb3";
 import { NotificationForm } from "../components/Push";
 import { GozillaOne } from "../components/Gozilla";
 import { Bangkok } from "../components/Bangkok";
+import { Apples } from "../components/Apples";
 import { useEffect } from "react";
 
 export default function Home() {
@@ -27,6 +28,7 @@ export default function Home() {
         {address && (
           <>
             <div className="foreground">
+              <Apples />
               <GozillaOne />
               <NotificationForm />
             </div>
