@@ -39,9 +39,6 @@ export default function Home() {
 
   return (
     <div className="relative w-screen h-screen">
-      <div>
-        <h1 className="text-2xl">collect all CO2 to de-flood Bangkok</h1>
-      </div>
       <div className="absolute inset-0 z-0">
         <Bangkok clickedDistricts={clickedDistricts} />
       </div>

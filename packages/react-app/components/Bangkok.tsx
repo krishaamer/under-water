@@ -68,7 +68,9 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
       if (impact <= 0.6) return "hsl(60, 90%, 60%)"; // Yellow
       return "hsl(0, 80%, 50%)"; // Red
     }
-    return isAnimated ? "hsl(200, 70%, 50%)" : "hsl(var(--muted))"; // Flood color or default
+    return isAnimated
+      ? "hsl(0, 0%, 85%)" // Lighter gray for animated districts
+      : "hsl(0, 0%, 60%)"; // Medium gray for default
   };
 
   return (
@@ -100,7 +102,7 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
                 animatedDistricts.includes(district.id)
               )}
               stroke="hsl(var(--border))"
-              strokeWidth="1"
+              strokeWidth="0.5"
               onMouseEnter={() => setHoveredDistrict(district.id)}
               onMouseLeave={() => setHoveredDistrict(null)}
               className="transition-colors duration-300 cursor-pointer"
