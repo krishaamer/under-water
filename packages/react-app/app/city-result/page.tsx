@@ -150,11 +150,11 @@ const cityData: CitiesData = {
   },
 };
 
-const CityResult: React.FC<CityResultProps> = ({
+export default function CityResult({
   selectedCity,
   onNavigate,
   onBack,
-}) => {
+}: CityResultProps) {
   if (!selectedCity) return null;
 
   return (
@@ -222,5 +222,3 @@ const CityResult: React.FC<CityResultProps> = ({
     </>
   );
 };
-
-export default CityResult;
