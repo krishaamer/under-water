@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface Apple {
   id: number;
@@ -67,21 +68,23 @@ export const Apples: React.FC<ApplesProps> = ({ onAppleClick }) => {
   return (
     <div>
       {apples.map((apple) => (
-        <img
+        <Image
           key={apple.id}
-          src="noun1-transparent.png" // Replace this with the correct path to the uploaded apple image
+          src="/noun1-transparent.png"
           alt="Apple"
+          width={apple.size}
+          height={apple.size}
           className={`apple ${apple.visible ? "visible" : ""}`}
           style={{
             position: "absolute",
             top: `${apple.y}%`,
             left: `${apple.x}%`,
-            width: `${apple.size}px`, // Dynamic size
-            height: `${apple.size}px`, // Dynamic size
-            pointerEvents: "auto", // Allow clicks
+            width: `${apple.size}px`,
+            height: `${apple.size}px`,
+            pointerEvents: "auto",
             cursor: "pointer",
           }}
-          onClick={() => handleAppleClick(apple.id)} // Handle click event
+          onClick={() => handleAppleClick(apple.id)}
         />
       ))}
     </div>
