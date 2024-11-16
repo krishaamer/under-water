@@ -20,16 +20,16 @@ export const Bangkok: React.FC<BangkokProps> = ({
   useEffect(() => {
     const districtsWithY = districts.map((district) => {
       const points = district.d
-        .match(/[\d.]+,[\d.]+/g) // Match coordinate pairs
-        ?.map((pair) => parseFloat(pair.split(",")[1])); // Extract y values
-      const minY = points ? Math.min(...points) : 0; // Get the smallest y value
+        .match(/[\d.]+,[\d.]+/g)
+        ?.map((pair) => parseFloat(pair.split(",")[1]));
+      const minY = points ? Math.min(...points) : 0;
       return { ...district, minY };
     });
 
     const sortedDistricts = districtsWithY.sort((a, b) => b.minY - a.minY);
 
     sortedDistricts.forEach((district, index) => {
-      const delay = Math.pow(index, 0.8) * 100; // Non-linear delay for wave effect
+      const delay = Math.pow(index, 0.8) * 100;
       setTimeout(() => {
         setAnimatedDistricts((prev) => [...prev, district.id]);
       }, delay);
@@ -64,13 +64,11 @@ export const Bangkok: React.FC<BangkokProps> = ({
     isAnimated: boolean
   ): string => {
     if (isClicked) {
-      if (impact <= 0.3) return "hsl(200, 70%, 50%)"; // Blue
-      if (impact <= 0.6) return "hsl(60, 90%, 60%)"; // Yellow
-      return "hsl(0, 80%, 50%)"; // Red
+      if (impact <= 0.3) return "hsl(200, 70%, 50%)";
+      if (impact <= 0.6) return "hsl(60, 90%, 60%)";
+      return "hsl(0, 80%, 50%)";
     }
-    return isAnimated
-      ? "hsl(210, 100%, 96%)" // Very light blue for animated districts
-      : "hsl(210, 100%, 98%)"; // Even lighter blue for default
+    return isAnimated ? "hsl(210, 100%, 96%)" : "hsl(210, 100%, 98%)";
   };
 
   return (
@@ -84,16 +82,15 @@ export const Bangkok: React.FC<BangkokProps> = ({
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
-      {/* Add SVG Background */}
       <g>
         <image
-          href="/bangkok.svg" // Replace with the correct path to your SVG file
+          href="/bangkok.svg"
           x="0"
           y="0"
           width="500"
           height="400"
           preserveAspectRatio="xMidYMid meet"
-          opacity="0.5" // Adjust opacity for better visibility
+          opacity="0.5"
         />
       </g>
       <g
