@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { districts } from "../lib/districts";
-import { NotificationForm } from "./Push";
 
 interface BangkokProps {
   clickedDistricts: string[];
@@ -74,43 +73,37 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-100">
-      <div className="absolute top-4 left-4 p-2 rounded-2xl shadow bg-pink-100">
-        <NotificationForm clickedDistricts={clickedDistricts} />
-      </div>
-
-      <svg
-        ref={svgRef}
-        viewBox="0 0 500 400"
-        className="w-full h-full"
-        style={{ cursor: isDragging ? "grabbing" : "grab" }}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
+    <svg
+      ref={svgRef}
+      viewBox="0 0 500 400"
+      className="w-full h-full"
+      style={{ cursor: isDragging ? "grabbing" : "grab" }}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+    >
+      <g
+        transform={`translate(${transform.x}, ${transform.y}) scale(${transform.scale})`}
       >
-        <g
-          transform={`translate(${transform.x}, ${transform.y}) scale(${transform.scale})`}
-        >
-          {districts.map((district) => (
-            <path
-              key={district.id}
-              d={district.d}
-              fill={getDistrictColor(
-                district.climateImpact,
-                clickedDistricts.includes(district.id),
-                animatedDistricts.includes(district.id)
-              )}
-              stroke="hsl(var(--border))"
-              strokeWidth="0.2"
-              onMouseEnter={() => setHoveredDistrict(district.id)}
-              onMouseLeave={() => setHoveredDistrict(null)}
-              className="transition-colors duration-300 cursor-pointer"
-              style={{ pointerEvents: "all" }}
-            />
-          ))}
-        </g>
-      </svg>
-    </div>
+        {districts.map((district) => (
+          <path
+            key={district.id}
+            d={district.d}
+            fill={getDistrictColor(
+              district.climateImpact,
+              clickedDistricts.includes(district.id),
+              animatedDistricts.includes(district.id)
+            )}
+            stroke="hsl(var(--border))"
+            strokeWidth="0.2"
+            onMouseEnter={() => setHoveredDistrict(district.id)}
+            onMouseLeave={() => setHoveredDistrict(null)}
+            className="transition-colors duration-300 cursor-pointer"
+            style={{ pointerEvents: "all" }}
+          />
+        ))}
+      </g>
+    </svg>
   );
 };

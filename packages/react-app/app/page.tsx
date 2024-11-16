@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useWeb3 } from "@/contexts/useWeb3";
 import { GozillaOne, CuteGozilla } from "../components/Gozilla"; // Import both components
@@ -7,6 +7,7 @@ import { Apples } from "../components/Apples";
 import { useEffect, useState } from "react";
 import { districts } from "../lib/districts";
 import ContractInteraction from "../components/Contract"; // Import the new component
+import { NotificationForm } from "../components/Push";
 
 export default function Home() {
   const { address, getUserAddress } = useWeb3();
@@ -39,9 +40,19 @@ export default function Home() {
 
   return (
     <div className="relative w-screen h-screen">
-      <div className="absolute inset-0 z-10 pointer-events-auto">
-        <Bangkok clickedDistricts={clickedDistricts} />
+      {/* NotificationForm always on top */}
+      <div className="fixed top-4 left-4 z-[9999] p-2 rounded-2xl shadow bg-pink-100">
+        <NotificationForm clickedDistricts={clickedDistricts} />
       </div>
+
+      {/* Bangkok component */}
+      <div className="absolute inset-0 z-10">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-100">
+          <Bangkok clickedDistricts={clickedDistricts} />
+        </div>
+      </div>
+
+      {/* Rest of the content */}
       <div className="absolute inset-0 flex flex-col justify-center items-center h-full z-20">
         {address && (
           <>
