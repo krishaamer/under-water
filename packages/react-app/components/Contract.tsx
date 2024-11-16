@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import { useWriteContract } from "wagmi";
 
-const CONTRACT_ADDRESS = "0xf163c4de6006a58558601f18635988ec562f5922";
+const CONTRACT_ADDRESS = "0xec28980605615954f48338c68a5623fd748065cc";
 const CONTRACT_ABI = [
   {
     inputs: [],
@@ -39,8 +39,15 @@ export default function ContractInteraction() {
       >
         {isPending ? "processing..." : "buy carbon credits"}
       </button>
-      {isSuccess && (
-        <p className="mt-2 text-green-600">purchase successful!</p>
+      {isSuccess && data && (
+        <a
+          href={`https://sepolia.basescan.org//tx/${data}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-blue-300 text-white px-4 ml-1 py-2 rounded-2xl hover:bg-blue-700"
+        >
+          See TX
+        </a>
       )}
       {error && <p className="mt-2 text-red-600">error: {error.message}</p>}
     </div>

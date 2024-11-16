@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import {
   type BaseError,
   useAccount,
-  useConnect,
-  useDisconnect,
   useWriteContract,
   useSimulateContract,
   useSwitchChain,
@@ -31,9 +29,7 @@ const ABI = [
 ] as const;
 
 export default function Offset() {
-  const { address, isConnected, chain } = useAccount();
-  const { connect } = useConnect();
-  const { disconnect } = useDisconnect();
+  const { isConnected, chain } = useAccount();
   const { switchChainAsync } = useSwitchChain();
 
   // Addresses and amount to swap
@@ -83,7 +79,7 @@ export default function Offset() {
   };
 
   return (
-    <div>
+    <div className="mt-2">
       {isConnected && (
         <>
           <button
@@ -96,7 +92,7 @@ export default function Offset() {
               chain?.id !== polygon.id
             }
           >
-            {isLoading ? "Processing..." : "Offset Carbon"}
+            {isLoading ? "processing..." : "offset carbon"}
           </button>
           {isSuccess && data && (
             <a
