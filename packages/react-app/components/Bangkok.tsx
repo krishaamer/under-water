@@ -1,7 +1,5 @@
-"use client";
-
-import React, { useState, useRef } from "react";
-import { districts } from "../lib/districts"
+import React, { useState, useEffect, useRef } from "react";
+import { districts } from "../lib/districts";
 import { NotificationForm } from "./Push";
 
 interface BangkokProps {
@@ -10,10 +8,23 @@ interface BangkokProps {
 
 export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
   const [hoveredDistrict, setHoveredDistrict] = useState<string | null>(null);
+  const [animatedDistricts, setAnimatedDistricts] = useState<string[]>([]);
   const [transform, setTransform] = useState({ x: 0, y: 0, scale: 1 });
   const [isDragging, setIsDragging] = useState(false);
   const [startDragPosition, setStartDragPosition] = useState({ x: 0, y: 0 });
   const svgRef = useRef<SVGSVGElement>(null);
+
+  useEffect(() => {
+    const animateDistricts = () => {
+      districts.forEach((district, index) => {
+        setTimeout(() => {
+          setAnimatedDistricts((prev) => [...prev, district.id]);
+        }, index * (2000 / districts.length)); // Spread animations over 2 seconds
+      });
+    };
+
+    animateDistricts();
+  }, []);
 
   const handleMouseDown = (event: React.MouseEvent) => {
     setIsDragging(true);
@@ -37,10 +48,8 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
     setIsDragging(false);
   };
 
-  const getDistrictColor = (impact: number): string => {
-    if (impact <= 0.3) return "hsl(200, 70%, 50%)"; // Blue
-    if (impact <= 0.6) return "hsl(60, 90%, 60%)"; // Yellow
-    return "hsl(0, 80%, 50%)"; // Red
+  const getDistrictColor = (impact: number, isAnimated: boolean): string => {
+    return isAnimated ? "hsl(200, 70%, 50%)" : "hsl(var(--muted))"; // Blue or default
   };
 
   return (
@@ -66,11 +75,10 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
             <path
               key={district.id}
               d={district.d}
-              fill={
-                clickedDistricts.includes(district.id)
-                  ? getDistrictColor(district.climateImpact)
-                  : "hsl(var(--muted))" // Default color
-              }
+              fill={getDistrictColor(
+                district.climateImpact,
+                animatedDistricts.includes(district.id)
+              )}
               stroke="hsl(var(--border))"
               strokeWidth="1"
               onMouseEnter={() => setHoveredDistrict(district.id)}
