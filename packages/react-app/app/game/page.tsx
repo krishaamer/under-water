@@ -25,7 +25,7 @@ export default function Home() {
 
   useEffect(() => {
     getUserAddress();
-  }, []);
+  }, [getUserAddress]);
 
   const handleAppleClick = (appleId: number) => {
     const districtId = districts[appleId % districts.length]?.id; // Use modulo for cycling through districts

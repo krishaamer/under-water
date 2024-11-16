@@ -11,10 +11,20 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
   const [transform, setTransform] = useState({ x: 0, y: 0, scale: 1 });
   const [isDragging, setIsDragging] = useState(false);
   const [startDragPosition, setStartDragPosition] = useState({ x: 0, y: 0 });
+  const [temperatureChange, setTemperatureChange] = useState<number>(2.0); // Base change in °C
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
-    // Extract the vertical position (y) from the `d` attribute
+    // Update average temperature change based on clickedDistricts
+    const baseChange = 2.0; // Base average change in °C
+    const reductionPerClick = 0.05; // Reduction per district clicked
+    const newTemperatureChange =
+      baseChange - clickedDistricts.length * reductionPerClick;
+
+    setTemperatureChange(parseFloat(newTemperatureChange.toFixed(2))); // Set new temperature change
+  }, [clickedDistricts]);
+
+  useEffect(() => {
     const districtsWithY = districts.map((district) => {
       const points = district.d
         .match(/[\d.]+,[\d.]+/g) // Match coordinate pairs
@@ -23,10 +33,8 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
       return { ...district, minY };
     });
 
-    // Sort districts by vertical position (descending order)
     const sortedDistricts = districtsWithY.sort((a, b) => b.minY - a.minY);
 
-    // Animate districts with an organic wave effect
     sortedDistricts.forEach((district, index) => {
       const delay = Math.pow(index, 0.8) * 100; // Non-linear delay for wave effect
       setTimeout(() => {
@@ -73,37 +81,44 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
   };
 
   return (
-    <svg
-      ref={svgRef}
-      viewBox="0 0 500 400"
-      className="w-full h-full"
-      style={{ cursor: isDragging ? "grabbing" : "grab" }}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-    >
-      <g
-        transform={`translate(${transform.x}, ${transform.y}) scale(${transform.scale})`}
+    <div className="relative">
+      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-white px-6 py-2 rounded shadow-md">
+        <p className="text-lg font-semibold text-center">
+          Average Temperature Change: {temperatureChange}°C
+        </p>
+      </div>
+      <svg
+        ref={svgRef}
+        viewBox="0 0 500 400"
+        className="w-full h-full"
+        style={{ cursor: isDragging ? "grabbing" : "grab" }}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
       >
-        {districts.map((district) => (
-          <path
-            key={district.id}
-            d={district.d}
-            fill={getDistrictColor(
-              district.climateImpact,
-              clickedDistricts.includes(district.id),
-              animatedDistricts.includes(district.id)
-            )}
-            stroke="hsl(var(--border))"
-            strokeWidth="0.2"
-            onMouseEnter={() => setHoveredDistrict(district.id)}
-            onMouseLeave={() => setHoveredDistrict(null)}
-            className="transition-colors duration-300 cursor-pointer"
-            style={{ pointerEvents: "all" }}
-          />
-        ))}
-      </g>
-    </svg>
+        <g
+          transform={`translate(${transform.x}, ${transform.y}) scale(${transform.scale})`}
+        >
+          {districts.map((district) => (
+            <path
+              key={district.id}
+              d={district.d}
+              fill={getDistrictColor(
+                district.climateImpact,
+                clickedDistricts.includes(district.id),
+                animatedDistricts.includes(district.id)
+              )}
+              stroke="hsl(var(--border))"
+              strokeWidth="0.2"
+              onMouseEnter={() => setHoveredDistrict(district.id)}
+              onMouseLeave={() => setHoveredDistrict(null)}
+              className="transition-colors duration-300 cursor-pointer"
+              style={{ pointerEvents: "all" }}
+            />
+          ))}
+        </g>
+      </svg>
+    </div>
   );
 };
