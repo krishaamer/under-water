@@ -68,7 +68,7 @@ export default function House() {
 
         <Link
           href="/choose-house"
-          className={`bg-colors-secondaryButton p-3 w-full text-lg text-white text-center transition-all duration-500 transform hover:scale-105 ${
+          className={`bg-colors-secondaryButton rounded-md  p-3 w-full text-lg text-white text-center transition-all duration-500 transform hover:scale-105 ${
             showButton
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-10"

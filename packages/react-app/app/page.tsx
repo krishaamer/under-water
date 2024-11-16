@@ -24,7 +24,7 @@ export default function Home() {
           setTimeout(() => setShowButton(true), 500);
           return prev;
         });
-      }, 80);
+      }, 70);
 
       return () => clearInterval(interval);
     }, 1000);
@@ -72,8 +72,7 @@ export default function Home() {
         </Link>
       </div>
 
-      {/* Overlay for dramatic effect */}
-      <div className="fixed inset-0 bg-gradient-radial from-transparent to-black opacity-20 pointer-events-none" />
+      <div className="fixed inset-0 bg-gradient-radial from-transparent to-gray opacity-20 pointer-events-none" />
     </div>
   );
 }

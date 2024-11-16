@@ -27,7 +27,7 @@ export default function LandingThree() {
 
         <Link
           href="/house"
-          className="bg-colors-secondaryButton p-3 w-1/4 text-white text-lg text-center font-bold "
+          className="rounded-md  bg-colors-secondaryButton p-3 w-1/4 text-white text-lg text-center font-bold "
         >
           {">"}
           {">"}
