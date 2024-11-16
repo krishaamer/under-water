@@ -216,7 +216,7 @@ const CityResult: React.FC<CityResultProps> = ({
           onClick={onNavigate}
           className="bg-colors-secondaryButton p-3 w-full text-white text-center font-bold rounded-md"
         >
-          Let's go and save the world!
+          Let&apos;s go and save the world!
         </button>
       </div>
     </>
