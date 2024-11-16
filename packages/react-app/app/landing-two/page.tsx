@@ -19,9 +19,10 @@ export default function LandingTwo() {
 
       <Link
         href="/landing-three"
-        className="bg-colors-secondaryButton p-3 w-full text-white text-center"
+        className="bg-colors-secondaryButton p-3 w-1/4 text-white text-center font-bold "
       >
-        CONTINUE
+        {">"}
+        {">"}
       </Link>
     </div>
   );

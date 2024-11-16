@@ -10,11 +10,11 @@ module.exports = {
     extend: {
       colors: {
         colors: {
-          primary: "#4ba2e6",
+          primary: "#d4ecff",
           primaryComp: "#00c77f",
           disableCard: "#C8D0CB",
           primaryLight: "#CFF2E5",
-          secondary: "#ff5757",
+          secondary: "#ff877d",
           secondaryButton: "#ff877d",
         },
         background: "hsl(var(--background))",

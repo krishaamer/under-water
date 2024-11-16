@@ -4,7 +4,7 @@ import houseImage from "@/public/house.png";
 
 export default function House() {
   return (
-    <div className="flex flex-col justify-center items-center px-5 py-2 gap-5">
+    <div className="flex flex-col justify-center items-center px-5 py-1 gap-3">
       <div className="justify-center text-center items-center font-bold leading-relaxed text-colors-secondary text-3xl backdrop-blur-md">
         Your House Will Be Under the Water{" "}
       </div>
@@ -13,15 +13,15 @@ export default function House() {
           src={houseImage}
           alt="Flooding illustration"
           width={500}
-          height={400}
+          height={300}
         />
       </div>
 
       <Link
-        href="/house"
+        href="/choose-house"
         className="bg-colors-secondaryButton p-3 w-full text-white text-center"
       >
-        Go!
+        Save The House!
       </Link>
     </div>
   );
