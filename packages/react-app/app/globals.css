@@ -13,3 +13,53 @@
 .animate-float {
   animation: float 4s ease-in-out infinite;
 }
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulseButton {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pulseSlow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s steps(1) infinite;
+}
+
+.animate-pulse-button {
+  animation: pulseButton 2s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 3s ease-in-out infinite;
+}
+
+.bg-gradient-radial {
+  background: radial-gradient(
+    circle at center,
+    var(--tw-gradient-from),
+    var(--tw-gradient-to)
+  );
+}
