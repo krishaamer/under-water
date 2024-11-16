@@ -1,26 +1,41 @@
 import { useEffect } from "react";
 import {
+  type BaseError,
   useAccount,
   useConnect,
   useDisconnect,
-  useContractWrite,
-  usePrepareContractWrite,
+  useWriteContract,
+  useSimulateContract,
+  useSwitchChain,
 } from "wagmi";
-import { InjectedConnector } from "wagmi/connectors/injected";
+import { injected } from "wagmi/connectors";
 import { parseUnits } from "viem";
+import { polygon } from "wagmi/chains";
 
 const CONTRACT_ADDRESS = "0x7cb7c0484d4f2324f51d81e2368823c20aef8072";
 
 const ABI = [
-  // ... your ABI array
+  {
+    inputs: [
+      { internalType: "address", name: "_fromToken", type: "address" },
+      { internalType: "address", name: "_poolToken", type: "address" },
+      { internalType: "uint256", name: "_amountToSwap", type: "uint256" },
+    ],
+    name: "autoOffsetExactInToken",
+    outputs: [
+      { internalType: "address[]", name: "tco2s", type: "address[]" },
+      { internalType: "uint256[]", name: "amounts", type: "uint256[]" },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
 ];
 
 export default function Offset() {
   const { address, isConnected } = useAccount();
-  const { connect } = useConnect({
-    connector: new InjectedConnector(),
-  });
+  const { connect } = useConnect();
   const { disconnect } = useDisconnect();
+  const { switchChain } = useSwitchChain();
 
   // Addresses and amount to swap
   const fromToken =
@@ -29,92 +44,70 @@ export default function Offset() {
     "0xD838290e877E0188a4A44700463419ED96c16107" as `0x${string}`;
   const amountToSwap = parseUnits("10", 6); // USDC has 6 decimals
 
-  const { config, error: prepareError } = usePrepareContractWrite({
-    address: CONTRACT_ADDRESS as `0x${string}`,
+  // Replace usePrepareContractWrite with useSimulateContract
+  const { data: simulateData, error: prepareError } = useSimulateContract({
+    address: CONTRACT_ADDRESS,
     abi: ABI,
     functionName: "autoOffsetExactInToken",
     args: [fromToken, poolToken, amountToSwap],
-    chainId: 137, // Polygon Mainnet chain ID
+    chainId: polygon.id,
   });
 
+  // Replace useContractWrite with useWriteContract
   const {
+    writeContract: write,
     data,
-    write,
-    isLoading,
+    isError: writeError,
+    isPending: isLoading,
     isSuccess,
-    error: writeError,
-  } = useContractWrite(config);
+  } = useWriteContract();
 
   // Handle network switching
   useEffect(() => {
-    const switchNetwork = async () => {
-      if (window.ethereum && isConnected) {
-        try {
-          await window.ethereum.request({
-            method: "wallet_switchEthereumChain",
-            params: [{ chainId: "0x89" }], // 0x89 is 137 in hex
-          });
-        } catch (switchError) {
-          const error = switchError as any;
-          if (error.code === 4902) {
-            try {
-              await window.ethereum.request({
-                method: "wallet_addEthereumChain",
-                params: [
-                  {
-                    chainId: "0x89",
-                    chainName: "Polygon Mainnet",
-                    nativeCurrency: {
-                      name: "MATIC",
-                      symbol: "MATIC",
-                      decimals: 18,
-                    },
-                    rpcUrls: ["https://polygon-rpc.com/"],
-                    blockExplorerUrls: ["https://polygonscan.com/"],
-                  },
-                ],
-              });
-            } catch (addError) {
-              console.error("Failed to add Polygon network", addError);
-            }
-          } else {
-            console.error("Failed to switch network", error);
-          }
-        }
+    if (isConnected) {
+      try {
+        switchChain({ chainId: polygon.id });
+      } catch (error) {
+        console.error("Failed to switch network", error);
       }
-    };
+    }
+  }, [isConnected, switchChain]);
 
-    switchNetwork();
-  }, [isConnected]);
+  const handleWrite = async () => {
+    if (!simulateData?.request) return;
+
+    try {
+      await write(simulateData.request);
+    } catch (error) {
+      console.error("Failed to write contract", error);
+    }
+  };
 
   return (
     <div>
       {!isConnected ? (
-        <button onClick={() => connect()}>Connect Wallet</button>
+        <button onClick={() => connect({ connector: injected() })}>
+          Connect Wallet
+        </button>
       ) : (
         <>
           <button onClick={() => disconnect()}>Disconnect</button>
           <button
-            onClick={() => write?.()}
-            disabled={!write || isLoading || !!prepareError}
+            onClick={handleWrite}
+            disabled={!simulateData?.request || isLoading || !!prepareError}
           >
             {isLoading ? "Processing..." : "Call autoOffsetExactInToken"}
           </button>
-          {isSuccess && (
+          {isSuccess && data && (
             <div>
               Transaction Hash:{" "}
               <a
-                href={`https://polygonscan.com/tx/${data?.hash}`}
+                href={`https://polygonscan.com/tx/${data}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {data?.hash}
+                {data}
               </a>
-            </div>
-          )}
-          {(prepareError || writeError) && (
-            <div style={{ color: "red" }}>
-              Error: {prepareError?.message || writeError?.message}
             </div>
           )}
         </>
