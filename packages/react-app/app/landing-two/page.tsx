@@ -27,7 +27,7 @@ export default function LandingTwo() {
 
         <Link
           href="/landing-three"
-          className="bg-colors-secondaryButton p-4 w-1/4 text-white text-center font-bold text-lg rounded-md "
+          className="bg-colors-secondaryButton p-4 w-1/4  text-white text-center font-bold text-lg rounded-md "
         >
           {">"}
           {">"}

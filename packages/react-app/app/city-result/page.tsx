@@ -4,7 +4,6 @@ import React, { Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import CityResult, { CityKey } from "../../components/CityResult";
 
-// Create a separate component for the content that uses useSearchParams
 function CityResultContent() {
   const searchParams = useSearchParams();
   const selectedCity = searchParams.get("city") as CityKey | null;
@@ -37,7 +36,6 @@ function CityResultContent() {
   );
 }
 
-// Main page component with Suspense boundary
 export default function CityResultPage() {
   return (
     <Suspense
