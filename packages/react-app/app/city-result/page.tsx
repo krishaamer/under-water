@@ -24,7 +24,7 @@ type CitiesData = {
   seattle: CityData;
 };
 
-type CityKey = keyof CitiesData;
+export type CityKey = keyof CitiesData;
 
 interface CityResultProps {
   selectedCity: CityKey;
@@ -223,4 +223,4 @@ const CityResult: React.FC<CityResultProps> = ({
   );
 };
 
-export { CityResult, cityData, type CityKey };
+export default CityResult;

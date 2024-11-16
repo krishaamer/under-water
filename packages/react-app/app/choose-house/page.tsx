@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { CityResult, cityData, type CityKey } from "../city-result/page";
+import CityResult, { CityKey } from "../city-result/page";
 
 export default function ChooseHouse() {
   const [selectedCity, setSelectedCity] = useState<CityKey | "">("");
