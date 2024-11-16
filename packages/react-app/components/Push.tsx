@@ -2,8 +2,11 @@
 
 import React, { useState } from "react";
 import { sendPushNotification } from "../lib/pushNotifications";
+import { useWalletClient } from "wagmi";
 
 export const NotificationForm: React.FC = () => {
+  const { data: walletClient } = useWalletClient();
+
   const [title, setTitle] = useState<string>("Hello World Notification");
   const [body, setBody] = useState<string>(
     "Web3 native notifications are here!"
@@ -16,7 +19,7 @@ export const NotificationForm: React.FC = () => {
     setFeedback("");
 
     try {
-      await sendPushNotification({ title, body });
+      await sendPushNotification({ walletClient, title, body });
       setFeedback("Notification sent successfully!");
     } catch (error) {
       setFeedback("Failed to send notification.");
