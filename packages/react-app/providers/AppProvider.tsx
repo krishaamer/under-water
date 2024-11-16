@@ -8,7 +8,7 @@ import {
   connectorsForWallets,
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider, createConfig, http } from 'wagmi';
-import { celo, celoAlfajores } from 'wagmi/chains';
+import { celo, celoAlfajores, polygon, sepolia } from 'wagmi/chains';
 
 import Layout from '../components/Layout';
 import { injectedWallet } from '@rainbow-me/rainbowkit/wallets';
@@ -21,17 +21,19 @@ const connectors = connectorsForWallets(
     },
   ],
   {
-    appName: 'Celo Composer',
+    appName: 'Under Water',
     projectId: process.env.WC_PROJECT_ID ?? '044601f65212332475a09bc14ceb3c34',
   }
 );
 
 const config = createConfig({
   connectors,
-  chains: [celo, celoAlfajores],
+  chains: [celo, celoAlfajores, polygon, sepolia],
   transports: {
     [celo.id]: http(),
     [celoAlfajores.id]: http(),
+    [polygon.id]: http(),
+    [sepolia.id]: http(),
   },
 });
 
