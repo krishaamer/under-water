@@ -4,7 +4,8 @@ import React, { Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import CityResult, { CityKey } from "../../components/CityResult";
 
-export default function CityResultPage() {
+// Create a separate component for the content that uses useSearchParams
+function CityResultContent() {
   const searchParams = useSearchParams();
   const selectedCity = searchParams.get("city") as CityKey | null;
   const router = useRouter();
@@ -28,12 +29,27 @@ export default function CityResultPage() {
   }
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <CityResult
-        selectedCity={selectedCity}
-        onNavigate={handleNavigate}
-        onBack={handleBack}
-      />
+    <CityResult
+      selectedCity={selectedCity}
+      onNavigate={handleNavigate}
+      onBack={handleBack}
+    />
+  );
+}
+
+// Main page component with Suspense boundary
+export default function CityResultPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex flex-col items-center px-3 gap-5 min-h-screen">
+          <div className="justify-center text-center items-center font-bold leading-relaxed text-colors-secondary text-3xl backdrop-blur-md">
+            Loading...
+          </div>
+        </div>
+      }
+    >
+      <CityResultContent />
     </Suspense>
   );
 }
