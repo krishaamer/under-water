@@ -15,15 +15,24 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
-    const animateDistricts = () => {
-      districts.forEach((district, index) => {
-        setTimeout(() => {
-          setAnimatedDistricts((prev) => [...prev, district.id]);
-        }, index * (2000 / districts.length)); // Spread animations over 2 seconds
-      });
-    };
+    // Extract the vertical position (y) from the `d` attribute
+    const districtsWithY = districts.map((district) => {
+      const points = district.d
+        .match(/[\d.]+,[\d.]+/g) // Match coordinate pairs
+        ?.map((pair) => parseFloat(pair.split(",")[1])); // Extract y values
+      const minY = points ? Math.min(...points) : 0; // Get the smallest y value
+      return { ...district, minY };
+    });
 
-    animateDistricts();
+    // Sort districts by their vertical position (descending order)
+    const sortedDistricts = districtsWithY.sort((a, b) => b.minY - a.minY);
+
+    // Animate districts based on their position
+    sortedDistricts.forEach((district, index) => {
+      setTimeout(() => {
+        setAnimatedDistricts((prev) => [...prev, district.id]);
+      }, index * (2000 / districts.length)); // Spread animations over 2 seconds
+    });
   }, []);
 
   const handleMouseDown = (event: React.MouseEvent) => {
@@ -48,8 +57,17 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
     setIsDragging(false);
   };
 
-  const getDistrictColor = (impact: number, isAnimated: boolean): string => {
-    return isAnimated ? "hsl(200, 70%, 50%)" : "hsl(var(--muted))"; // Blue or default
+  const getDistrictColor = (
+    impact: number,
+    isClicked: boolean,
+    isAnimated: boolean
+  ): string => {
+    if (isClicked) {
+      if (impact <= 0.3) return "hsl(200, 70%, 50%)"; // Blue
+      if (impact <= 0.6) return "hsl(60, 90%, 60%)"; // Yellow
+      return "hsl(0, 80%, 50%)"; // Red
+    }
+    return isAnimated ? "hsl(200, 70%, 50%)" : "hsl(var(--muted))"; // Flood color or default
   };
 
   return (
@@ -77,6 +95,7 @@ export const Bangkok: React.FC<BangkokProps> = ({ clickedDistricts }) => {
               d={district.d}
               fill={getDistrictColor(
                 district.climateImpact,
+                clickedDistricts.includes(district.id),
                 animatedDistricts.includes(district.id)
               )}
               stroke="hsl(var(--border))"
