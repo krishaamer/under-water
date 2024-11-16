@@ -31,7 +31,7 @@ export const Apples: React.FC<ApplesProps> = ({ onAppleClick }) => {
       const minX = (screenWidth - centerWidth) / 2;
       const minY = (screenHeight - centerHeight) / 2;
 
-      for (let i = 0; i < 18; i++) {
+      for (let i = 0; i < 17; i++) {
         const size = Math.random() * (80 - 50) + 50; // Random size between 50 and 80 pixels
         const x = minX + Math.random() * (centerWidth - size); // Random x within center area
         const y = minY + Math.random() * (centerHeight - size); // Random y within center area
