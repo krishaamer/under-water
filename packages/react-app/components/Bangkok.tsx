@@ -84,6 +84,18 @@ export const Bangkok: React.FC<BangkokProps> = ({
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
+      {/* Add SVG Background */}
+      <g>
+        <image
+          href="/bangkok.svg" // Replace with the correct path to your SVG file
+          x="0"
+          y="0"
+          width="500"
+          height="400"
+          preserveAspectRatio="xMidYMid meet"
+          opacity="0.5" // Adjust opacity for better visibility
+        />
+      </g>
       <g
         transform={`translate(${transform.x}, ${transform.y}) scale(${transform.scale})`}
       >
