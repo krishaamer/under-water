@@ -56,7 +56,6 @@ export default function Home() {
           {text.slice(0, textIndex)}
           <span className="animate-blink">|</span>
         </div>
-
         <Link
           href="/landing-two"
           className={`bg-colors-secondaryButton p-4 w-full text-white text-center font-bold text-lg rounded-md 

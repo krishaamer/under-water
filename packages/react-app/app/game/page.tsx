@@ -89,12 +89,14 @@ export default function Home() {
                   <OffsetBase />
                   <OffsetPolygon />
                   <OffsetCelo />
-                  <Link
-                    href="/complete"
-                    className="bg-blue-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-700 disabled:bg-gray-400"
-                  >
-                    Complete
-                  </Link>
+                  <div className="mt-4">
+                    <Link
+                      href="/complete"
+                      className="bg-blue-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-700 disabled:bg-gray-400"
+                    >
+                      Complete
+                    </Link>
+                  </div>
                 </>
               ) : (
                 <GozillaOne size={gozillaSize} />
