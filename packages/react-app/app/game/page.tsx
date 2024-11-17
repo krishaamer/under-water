@@ -7,10 +7,11 @@ import { Bangkok } from "../../components/Bangkok";
 import { Apples } from "../../components/Apples";
 import { useEffect, useState } from "react";
 import { districts } from "../../lib/districts";
-import ContractInteraction from "../../components/Contract";
-import Offset from "../../components/Offset";
+import OffsetBase from "../../components/OffsetBase";
+import OffsetPolygon from "../../components/OffsetPolygon";
 import OffsetCelo from "../../components/OffsetCelo";
 import { NotificationForm } from "../../components/Push";
+import Link from "next/link";
 
 export default function Home() {
   const { address, getUserAddress } = useWeb3();
@@ -85,9 +86,15 @@ export default function Home() {
               {allDistrictsClicked ? (
                 <>
                   <CuteGozilla size={gozillaSize} />
-                  <ContractInteraction />
-                  <Offset />
+                  <OffsetBase />
+                  <OffsetPolygon />
                   <OffsetCelo />
+                  <Link
+                    href="/complete"
+                    className="bg-blue-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-700 disabled:bg-gray-400"
+                  >
+                    Complete
+                  </Link>
                 </>
               ) : (
                 <GozillaOne size={gozillaSize} />

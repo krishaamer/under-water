@@ -1,12 +1,7 @@
-import { useEffect } from "react";
-import {
-  type BaseError,
-  useAccount,
-  useWriteContract,
-  useSwitchChain,
-} from "wagmi";
+import { useAccount, useWriteContract, useSwitchChain } from "wagmi";
 import { parseUnits } from "viem";
 import { polygon } from "wagmi/chains";
+import { type BaseError } from "wagmi";
 
 const CONTRACT_ADDRESS = "0x7cb7c0484d4f2324f51d81e2368823c20aef8072" as const;
 
@@ -27,7 +22,7 @@ const ABI = [
   },
 ] as const;
 
-export default function Offset() {
+export default function OffsetPolygon() {
   const { isConnected, chain } = useAccount();
   const { switchChainAsync } = useSwitchChain();
 
@@ -44,23 +39,14 @@ export default function Offset() {
     isSuccess,
   } = useWriteContract();
 
-  // Handle network switching
-  useEffect(() => {
-    const switchToPolygon = async () => {
-      if (isConnected && chain?.id !== polygon.id) {
-        try {
-          await switchChainAsync({ chainId: polygon.id });
-        } catch (error) {
-          console.error("Failed to switch network", error);
-        }
-      }
-    };
-
-    switchToPolygon();
-  }, [isConnected, chain?.id, switchChainAsync]);
-
   const handleWrite = async () => {
     try {
+      // First check if we need to switch networks
+      if (chain?.id !== polygon.id) {
+        await switchChainAsync({ chainId: polygon.id });
+      }
+
+      // Then proceed with the contract write
       await writeContract({
         address: CONTRACT_ADDRESS,
         abi: ABI,
@@ -80,7 +66,7 @@ export default function Offset() {
           <button
             onClick={handleWrite}
             className="bg-blue-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-700 disabled:bg-gray-400"
-            disabled={isLoading || chain?.id !== polygon.id}
+            disabled={isLoading}
           >
             {isLoading ? "processing..." : "offset carbon (polygon)"}
           </button>

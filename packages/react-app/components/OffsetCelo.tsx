@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import {
   type BaseError,
   useAccount,
@@ -31,10 +31,11 @@ export default function OffsetCelo() {
   const { isConnected, chain } = useAccount();
   const { switchChainAsync } = useSwitchChain();
 
-  // Updated Celo addresses
+  const [isSwitching, setIsSwitching] = useState(false);
+
   const fromToken = "0x765DE816845861e75A25fCA122bb6898B8B1282a" as const; // USDC on Celo
   const poolToken = "0x02De4766C272abc10Bc88c220D214A26960a7e92" as const; // Pool token on Celo
-  const amountToSwap = parseUnits("1000", 0); // Using the example amount from the contract
+  const amountToSwap = parseUnits("1000", 0); // Example amount from the contract
 
   const {
     writeContract,
@@ -44,23 +45,13 @@ export default function OffsetCelo() {
     isSuccess,
   } = useWriteContract();
 
-  // Updated to switch to Celo network
-  useEffect(() => {
-    const switchToCelo = async () => {
-      if (isConnected && chain?.id !== celo.id) {
-        try {
-          await switchChainAsync({ chainId: celo.id });
-        } catch (error) {
-          console.error("Failed to switch network", error);
-        }
-      }
-    };
-
-    switchToCelo();
-  }, [isConnected, chain?.id, switchChainAsync]);
-
   const handleWrite = async () => {
     try {
+      if (isConnected && chain?.id !== celo.id) {
+        setIsSwitching(true);
+        await switchChainAsync({ chainId: celo.id });
+        setIsSwitching(false);
+      }
       await writeContract({
         address: CONTRACT_ADDRESS,
         abi: ABI,
@@ -70,6 +61,7 @@ export default function OffsetCelo() {
       });
     } catch (e) {
       console.error("Failed to write contract", e);
+      setIsSwitching(false);
     }
   };
 
@@ -80,9 +72,11 @@ export default function OffsetCelo() {
           <button
             onClick={handleWrite}
             className="bg-blue-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-700 disabled:bg-gray-400"
-            disabled={isLoading || chain?.id !== celo.id}
+            disabled={isLoading || isSwitching}
           >
-            {isLoading ? "processing..." : "offset carbon (celo)"}
+            {isLoading || isSwitching
+              ? "Processing..."
+              : "Offset Carbon (Celo)"}
           </button>
           {isSuccess && data && (
             <a
