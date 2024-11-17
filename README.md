@@ -1,6 +1,6 @@
 ## About The Project
 
-**UnderTheWater** is a smart contract project built using [Hardhat](https://hardhat.org/) that integrates [Toucan](https://app.toucan.earth/contracts) and [Push Protocol](https://pushprotocol.com/) to provide a seamless workflow for users. This contract allows users to complete payment, redeem, retire, and attest carbon credits in a single transaction. The attestation feature leverages Push Protocol for enhanced communication and user engagement.
+**UnderTheWater** is a smart contract project built using [Hardhat](https://hardhat.org/) that integrates [Toucan](https://app.toucan.earth/contracts), [Sign Protocol](https://sign.global) and [Push Protocol](https://pushprotocol.com/) to provide a seamless workflow for users. This contract allows users to complete payment, redeem, retire, and attest carbon credits in a single transaction. The attestation feature leverages Push Protocol for enhanced communication and user engagement.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -23,6 +23,10 @@ UnderTheWater is built on various technologies to facilitate decentralized appli
 - [Toucan Protocol](https://toucan.earth/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+## Smart Contract Related Integration
+
+[Smart Contract related integration](https://github.com/krishaamer/under-water/blob/main/packages/hardhat/README.md)
 
 ## Push Protocol Integration
 
