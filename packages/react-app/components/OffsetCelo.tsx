@@ -75,8 +75,8 @@ export default function OffsetCelo() {
             disabled={isLoading || isSwitching}
           >
             {isLoading || isSwitching
-              ? "Processing..."
-              : "Offset Carbon (Celo)"}
+              ? "processing..."
+              : "offset carbon (celo)"}
           </button>
           {isSuccess && data && (
             <a
