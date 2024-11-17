@@ -4,6 +4,11 @@
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+## Screenshot
+
+<img width="1887" alt="bangkok-under-water" src="https://github.com/user-attachments/assets/bec2251f-52c7-42dd-83d6-d51ee07351f1">
+
+
 ## Built With
 
 UnderTheWater is built on various technologies to facilitate decentralized application development:
