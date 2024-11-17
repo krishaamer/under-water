@@ -1,258 +1,285 @@
-<!-- TITLE -->
-<p align="center">
-  <img width="100px" src="https://github.com/celo-org/celo-composer/blob/main/images/readme/celo_isotype.svg" align="center" alt="Celo" />
- <h2 align="center">Celo Composer - MiniPay Template</h2>
- <p align="center">Build, deploy, and iterate quickly on decentralized applications using Celo for MiniPay.</p>
-</p>
-  <p align="center">
-    <a href="https://github.com/celo-org/celo-composer/graphs/stars">
-      <img alt="GitHub Contributors" src="https://img.shields.io/github/stars/celo-org/celo-composer?color=FCFF52" />
-    </a>
-    <a href="https://github.com/celo-org/celo-composer/graphs/contributors">
-      <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/celo-org/celo-composer?color=E7E3D4" />
-    </a>
-    <a href="https://github.com/celo-org/celo-composer/issues">
-      <img alt="Issues" src="https://img.shields.io/github/issues/celo-org/celo-composer?color=E7E3D4" />
-    </a>
-    <a href="https://github.com/celo-org/celo-composer/pulls">
-      <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/celo-org/celo-composer?color=E7E3D4" />
-    </a>
-    <a href="https://opensource.org/license/mit/">
-      <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
-    </a>
-  </p>
-</p>
-
-<!-- TABLE OF CONTENTS -->
-
-<div>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li><a href="#about-the-project">About The Project</a></li>
-      <ol>
-        <li><a href="#built-with">Built With</a></li>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#minipay">MiniPay</a></li>
-     </ol>
-    <li><a href="#how-to-use-celo-composer">How to use Celo Composer</a></li>
-        <ol>
-          <li><a href="#install-dependencies">Install Dependencies</a></li>
-          <li><a href="#deploy-a-smart-contract">Deploy a Smart Contract</a></li>
-          <li><a href="#deploy-your-dapp-locally">Deploy your Dapp Locally</a></li>
-          <li><a href="#add-ui-components">Add UI Components</a></li>
-          <li><a href="#deploy-with-vercel">Deploy with Vercel</a></li>
-          <li><a href="#supported-frameworks">Supported Frameworks</a></li>
-        </ol>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#support">Support</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ol>
-</div>
-
-<!-- ABOUT THE PROJECT -->
-
 ## About The Project
 
-Celo Composer allows you to quickly build, deploy, and iterate on decentralized applications using Celo. It provides a number of frameworks, templates, deployment and component support, and Celo specific functionality to help you get started with your next dApp. 
+**UnderTheWater** is a smart contract project built using [Hardhat](https://hardhat.org/) that integrates [Toucan](https://app.toucan.earth/contracts) and [Push Protocol](https://pushprotocol.com/) to provide a seamless workflow for users. This contract allows users to complete payment, redeem, retire, and attest carbon credits in a single transaction. The attestation feature leverages Push Protocol for enhanced communication and user engagement.
 
-It is the perfect lightweight starter-kit for any hackathon and for quickly testing out integrations and deployments on Celo.
+It is the perfect lightweight starter-kit for any hackathon and for quickly testing out integrations and deployments across various blockchain networks.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Built With
 
-Celo Composer is built on Celo to make it simple to build dApps using a variety of front-end frameworks, and libraries.
+UnderTheWater is built on various technologies to facilitate decentralized application development:
 
-- [Celo](https://celo.org/)
 - [Solidity](https://docs.soliditylang.org/en/v0.8.19/)
 - [Hardhat](https://hardhat.org/)
 - [React.js](https://reactjs.org/)
 - [Next.js](https://nextjs.org/)
-- [viem](https://viem.sh/)
-- [Tailwind](https://tailwindcss.com/)
+- [Viem](https://viem.sh/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Push Protocol](https://pushprotocol.com/)
+- [Toucan Protocol](https://toucan.earth/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
+## Push Protocol Integration
 
-## Prerequisites
+Push Protocol is integrated into the UnderTheWater project to provide on-chain push notifications. This enhances user experience by enabling real-time communication directly from the blockchain.
 
-- Node (v20 or higher)
-- Git (v2.38 or higher)
+### Key Features of Push Protocol
 
-## MiniPay
+- **On-Chain Notifications:** Seamlessly send notifications triggered by smart contract events.
+- **User Engagement:** Keep users informed about important actions like transactions, deployments, and updates.
+- **Decentralized Messaging:** Ensures that notifications are trustless and decentralized, aligning with the principles of blockchain technology.
 
-Welcome to the [MiniPay](https://www.opera.com/products/minipay) wallet integration guide. MiniPay is one of the fastest growing wallets that was built out by Opera on Celo that seeks to create a simple user experience to use DApps. MiniPay is available as a standalone app and inside the Opera Mini browser on Android phones thereby allowing DApp developers to tap into a distribution of 100M users on integration.
+### How It Works
 
-This guide provides information on how to develop and test your dapp for MiniPay.
+UnderTheWater leverages Push Protocol's REST API to send notifications based on specific events occurring within the smart contract. For example, when a user retires carbon credits, a notification is sent to inform them of the successful action.
 
-To get started with MiniPay, we recommend testing the wallet and building a sample dApp using our starter kit. The following steps will guide you through setting up MiniPay, building your dApp, and testing it in the wallet.
+### Setting Up Push Protocol
 
-:::info
-Install the new [MiniPay standalone app](https://play.google.com/store/apps/details?id=com.opera.minipay) now! 🎉 📥
-:::
+1. **Install Push Protocol SDK:**
 
-## How to use Celo Composer - MiniPay template
+   ```bash
+   npm install @pushprotocol/restapi
+   ```
 
-The easiest way to start with Celo Composer is using `@celo/celo-composer`. This CLI tool lets you quickly start building dApps on Celo, including several templates. To get started, just run the following command, and follow the steps:
+2. **Configure Push Notifications:**
 
-- Step 1
+   Implement the Push Protocol in your frontend to send notifications. Refer to the [Push Protocol Documentation](https://docs.pushprotocol.com/) for detailed instructions.
 
-```bash
-npx @celo/celo-composer@latest create
-```
+3. **Usage Example:**
 
-- Step 2: Provide the Project Name: You will be prompted to enter the name of your project.
+   Here's a sample implementation in a Next.js component:
 
-```text
-What is your project name: 
-```
+   ```typescript:packages/react-app/lib/pushNotifications.ts
+   import { PushAPI } from "@pushprotocol/restapi";
 
-- Step 3: Choose to Use Hardhat: You will be asked if you want to use Hardhat. Select Yes or No.
+   interface PushNotificationPayload {
+     walletClient: any; // Replace 'any' with the correct type if known
+     title: string;
+     body: string;
+   }
 
-```text
-Do you want to use Hardhat? (Y/n)
-```
+   const verifyAndSwitchChain = async (): Promise<void> => {
+     const provider = window.ethereum;
+     if (!provider) throw new Error("No wallet detected.");
 
-- Step 4: Choose to Use a Template: You will be asked if you want to use a template. Select `Yes` .
+     const chainId = await provider.request({ method: "eth_chainId" });
+     console.log("Current chainId:", parseInt(chainId, 16));
 
-```text
-Do you want to use a template?
-```
+     // Check if the user is connected to the Sepolia testnet (chain ID 11155111)
+     if (parseInt(chainId, 16) !== 11155111) {
+       try {
+         console.log("Switching to chain 11155111 (Sepolia testnet)...");
+         await provider.request({
+           method: "wallet_switchEthereumChain",
+           params: [{ chainId: "0xaa36a7" }], // Hexadecimal for 11155111
+         });
+         console.log("Switched to chain 11155111 (Sepolia testnet).");
+       } catch (error: any) {
+         if (error.code === 4902) {
+           console.log("Adding and switching to Sepolia Testnet...");
+           await provider.request({
+             method: "wallet_addEthereumChain",
+             params: [
+               {
+                 chainId: "0xaa36a7",
+                 chainName: "Sepolia Testnet",
+                 rpcUrls: ["https://rpc.sepolia.org"],
+                 nativeCurrency: {
+                   name: "Sepolia Ether",
+                   symbol: "ETH",
+                   decimals: 18,
+                 },
+                 blockExplorerUrls: ["https://sepolia.etherscan.io"],
+               },
+             ],
+           });
+           console.log("Added and switched to chain 11155111 (Sepolia testnet).");
+         } else {
+           console.error("Error during network switching:", error);
+           throw error;
+         }
+       }
+     } else {
+       console.log("Already connected to chain 11155111 (Sepolia testnet).");
+     }
+   };
 
-- Step 5: Select a Template: If you chose to use a template, you will be prompted to select `MiniPay` from the list provided.
+   export const sendPushNotification = async ({
+     walletClient,
+     title,
+     body,
+   }: PushNotificationPayload): Promise<void> => {
+     try {
+       console.log("Verifying chain and switching if necessary...");
+       await verifyAndSwitchChain();
 
-- Step 6: Provide the Project Owner's Name: You will be asked to enter the project owner's name.
+       console.log("Initializing Push Protocol user...");
+       const user = await PushAPI.initialize(walletClient);
 
-```text
-Project Owner name:
-```
+       console.log("Sending Push Notification...");
+       const response = await user.channel.send(["*"], {
+         notification: {
+           title,
+           body,
+         },
+       });
 
-- Step 7: Wait for Project Creation: The CLI will now create the project based on your inputs. This may take a few minutes.
+       console.log("Notification sent successfully:", response);
+     } catch (error) {
+       console.error("Error sending notification:", error);
+     }
+   };
+   ```
 
-- Step 8: Follow the instructions to start the project. The same will be displayed on the console after the project is created.
+   ```tsx:packages/react-app/components/Push.tsx
+   "use client";
 
-```text
-🚀 Your starter project has been successfully created!
-```
+   import React, { useState } from "react";
+   import { sendPushNotification } from "../lib/pushNotifications";
+   import { useWalletClient } from "wagmi";
+   import Image from "next/image";
+   import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+   import {
+     Accordion,
+     AccordionContent,
+     AccordionItem,
+     AccordionTrigger,
+   } from "@/components/ui/accordion";
 
-## Install Dependencies
+   interface NotificationFormProps {
+     clickedDistricts: string[];
+   }
 
+   export const NotificationForm: React.FC<NotificationFormProps> = ({
+     clickedDistricts,
+   }) => {
+     const { data: walletClient } = useWalletClient();
 
-Once your custom dApp has been created, just install dependencies, either with yarn:
+     const [title, setTitle] = useState<string>("Hi");
+     const [body, setBody] = useState<string>(
+       "gm frens i'm need help buy carbon creds save bkk from sea level rise.. plsss join!"
+     );
+     const [feedback, setFeedback] = useState<string>("");
+     const [loading, setLoading] = useState<boolean>(false);
 
-```bash
-   yarn
-```
+     const handleSubmit = async () => {
+       setLoading(true);
+       setFeedback("");
 
-If you prefer npm, you can run:
+       try {
+         await sendPushNotification({ walletClient, title, body });
+         setFeedback("Notification sent!");
+       } catch (error) {
+         setFeedback("Failed to send notification!");
+       } finally {
+         setLoading(false);
+       }
+     };
 
-```bash
+     return (
+       <Accordion type="single" collapsible>
+         <AccordionItem value="item-1">
+           <AccordionTrigger>Climate Chat</AccordionTrigger>
+           <AccordionContent>
+             <div className="w-72 mx-auto p-4 bg-white shadow rounded-2xl z-30 pointer-events-auto">
+               <Image
+                 src={feedback ? "/moo-deng-glasses.jpg" : "/moo-deng.png"}
+                 width={150}
+                 height={150}
+                 alt="Baby Hippo Moo Deng"
+                 className="rounded-2xl"
+               />
+               <button
+                 onClick={handleSubmit}
+                 disabled={loading}
+                 className="bg-blue-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-700 disabled:bg-gray-400 mt-4"
+               >
+                 {loading ? "Sending..." : "Send Notification"}
+               </button>
+               {feedback && <p className="mt-2 text-green-600">{feedback}</p>}
+             </div>
+           </AccordionContent>
+         </AccordionItem>
+       </Accordion>
+     );
+   };
+   ```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Installation
+
+1. **Clone the Repository:**
+
+   ```bash
+   git clone https://github.com/yourusername/UnderTheWater.git
+   cd UnderTheWater/packages/hardhat
+   ```
+
+2. **Install Dependencies:**
+
+   Using npm:
+
+   ```bash
    npm install
-```
+   ```
 
-## Deploy a Smart Contract
+   Or using Yarn:
 
-Find the detailed instructions on how to run your smart contract in [packages/hardhat/README.md](./packages/hardhat/README.md).
+   ```bash
+   yarn install
+   ```
 
-For quick development follow these three steps:
+3. **Configure Environment Variables:**
 
-1. Change `packages/hardhat/env.template` to `packages/hardhat/env` and add your `PRIVATE_KEY` into the `.env` file.
-2. Make sure your wallet is funded when deploying to testnet or mainnet. You can get test tokens for deploying it on Alfajores from the [Celo Faucet](https://faucet.celo.org/alfajores).
-3. Run the following commands from the `packages/hardhat` folder to deploy your smart contract to the Celo Testnet Alfajores:
+   Create a `.env` file in the `packages/hardhat` directory:
 
-```bash
-npx hardhat ignition deploy ./ignition/modules/MiniPay.ts --network alfajores
-```
-
-## Deploy your Dapp Locally
-
-Find the detailed instructions on how to run your frontend in the [`react-dapp` README.md](./packages/react-app/README.md).
-
-Before you start the project, please follow these steps:
-
-1. Rename the file:
-   packages/react-app/.env.template
-   to
-   packages/react-app/.env
-
-2. Open the newly renamed .env file and add your WalletConnect Cloud Project ID from [WalletConnect Cloud](https://cloud.walletconnect.com/)
-
-Once you've done that, you're all set to start your project!
-
-Run the following commands from the `packages/react-app` folder to start the project:
-
-```bash
-   yarn dev
-```
-
-If you prefer npm, you can run:
-
-```bash
-   npm run dev
-```
-
-Thank you for using Celo Composer! If you have any questions or need further assistance, please refer to the README or reach out to our team.
-
-**_🔥Voila, you have a dApp ready to go. Start building your dApp on Celo._**
-
-
-## Add UI Components
-
-To keep the Celo Composer as lightwieght as possible we didn't add any components but rather a guide on how to add the components you need yourself with a very simple to use components library. To learn how to add UI components using [ShadCN](https://ui.shadcn.com/) in this project, refer to the [UI Components Guide](./docs/UI_COMPONENTS.md).
-
-## Deploy with Vercel
-
-The Celo Composer is a great tool for hackathons and fast deployments. We created a guide for you, using the Vercel CLI to create a live deployment in minutes. For detailed instructions on deploying the Next.js app using Vercel CLI, refer to the [Deployment Guide](./docs/DEPLOYMENT_GUIDE.md).
-
-
-## Supported Frameworks
-
-### React / Nextjs
-
-- Support for Website and Progressive Web Application.
-- Works with all major crypto wallets.
-
-Check [nextjs docs](https://nextjs.org/docs) to learn more about it.
-
-### Hardhat
-
-- Robust framework for building and testing smart contracts.
-- Compatible with various Ethereum development tools and plugins.
-
-Check [hardhat docs](https://hardhat.org/hardhat-runner/docs/getting-started) to learn more about it.
-
-## Support
-
-Join the Celo Discord server at <https://chat.celo.org>. Reach out on the dedicated repo channel [here](https://discord.com/channels/600834479145353243/941003424298856448).
-
-<!-- ROADMAP -->
-
-## Roadmap
-
-See the [open issues](https://github.com/celo-org/celo-composer/issues) for a full list of proposed features (and known issues).
+   ```env
+   INFURA_PROJECT_ID=your_infura_project_id
+   PRIVATE_KEY=your_private_key
+   BASESCAN_API_KEY=your_basescan_api_key
+   CELOSCAN_API_KEY=your_celoscan_api_key
+   PUSHPROTOCOL_API_KEY=your_pushprotocol_api_key
+   ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- CONTRIBUTING -->
+## Usage
 
-## Contributing
+### Common Tasks
 
-We welcome contributions from the community.
+- **Display Help:**
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+  ```shell
+  npx hardhat help
+  ```
 
-## License
+- **Run Tests:**
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+  ```shell
+  npx hardhat test
+  ```
 
-<!-- CONTACT -->
-## Contact
+- **Run Tests with Gas Reporting:**
 
-- [@CeloDevs](https://twitter.com/CeloDevs)
-- [Discord](https://discord.com/invite/celo)
+  ```shell
+  REPORT_GAS=true npx hardhat test
+  ```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+- **Start a Local Hardhat Node:**
+
+  ```shell
+  npx hardhat node
+  ```
+
+- **Deploy Contracts Using Ignition Module:**
+
+  ```shell
+  npx hardhat ignition deploy ./ignition/modules/Lock.ts
+  ```
+
+### Deploying the Contract
+
+Use the deployment script to deploy `UnderTheWater`:
