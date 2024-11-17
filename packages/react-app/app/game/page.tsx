@@ -8,6 +8,8 @@ import { Apples } from "../../components/Apples";
 import { useEffect, useState } from "react";
 import { districts } from "../../lib/districts";
 import ContractInteraction from "../../components/Contract";
+import Offset from "../../components/Offset";
+import OffsetCelo from "../../components/OffsetCelo";
 import { NotificationForm } from "../../components/Push";
 
 export default function Home() {
@@ -84,6 +86,8 @@ export default function Home() {
                 <>
                   <CuteGozilla size={gozillaSize} />
                   <ContractInteraction />
+                  <Offset />
+                  <OffsetCelo />
                 </>
               ) : (
                 <GozillaOne size={gozillaSize} />
