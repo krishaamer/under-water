@@ -1,4 +1,6 @@
 import "@/styles/globals.css";
+import "./globals.css";
+
 import { AppProvider } from "@/providers/AppProvider";
 
 export default function RootLayout({

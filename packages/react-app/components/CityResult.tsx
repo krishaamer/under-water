@@ -158,16 +158,15 @@ export default function CityResult({
   if (!selectedCity) return null;
 
   return (
-    <div className="flex flex-col items-center px-3 gap-5 min-h-screen">
-      <div className="justify-center text-center items-center font-bold leading-relaxed text-colors-secondary text-3xl backdrop-blur-md">
-        See how rising seas could affect your home by 2050
-      </div>
-
-      <h3 className="text-3xl font-bold mb-4">
+    <div className="flex flex-col items-center px-5 gap-5 min-h-screen">
+      <h3 className="text-3xl font-bold mb-2">
         {cityData[selectedCity].title}
       </h3>
+      <div className="px-2 justify-center text-center items-center font-bold leading-relaxed text-colors-secondary text-2xl backdrop-blur-md">
+        See How Rising Seas Could Affect Your Home By 2050
+      </div>
 
-      <div className="bg-blue-400 text-white p-6 rounded-lg w-3/4">
+      <div className="bg-blue-400 text-white p-6 rounded-lg text-xl w-full ">
         <div className="space-y-4">
           <p className="font-semibold">{cityData[selectedCity].impacts.main}</p>
           <p>{cityData[selectedCity].impacts.description}</p>
@@ -207,14 +206,14 @@ export default function CityResult({
       <div className="flex flex-row gap-2 w-full mt-4">
         <button
           onClick={onBack}
-          className="bg-colors-secondaryButton p-3 w-full text-white text-center font-bold rounded-md"
+          className="bg-colors-secondaryButton p-3 text-lg w-full text-white text-center font-bold rounded-md"
         >
           Check Other City
         </button>
 
         <button
           onClick={onNavigate}
-          className="bg-colors-secondaryButton p-3 w-full text-white text-center font-bold rounded-md"
+          className="bg-colors-secondaryButton p-3 w-full text-base text-white text-center font-bold rounded-md"
         >
           Let's go and save the world!
         </button>
