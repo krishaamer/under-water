@@ -3,7 +3,6 @@ import {
   type BaseError,
   useAccount,
   useWriteContract,
-  useSimulateContract,
   useSwitchChain,
 } from "wagmi";
 import { parseUnits } from "viem";
@@ -37,17 +36,9 @@ export default function Offset() {
   const poolToken = "0xD838290e877E0188a4A44700463419ED96c16107" as const;
   const amountToSwap = parseUnits("10", 1);
 
-  const { data: simulateData, error: prepareError } = useSimulateContract({
-    address: CONTRACT_ADDRESS,
-    abi: ABI,
-    functionName: "autoOffsetExactInToken",
-    args: [fromToken, poolToken, amountToSwap],
-    chainId: polygon.id,
-  });
-
   const {
-    writeContract: write,
-    data,
+    writeContract,
+    data: hash,
     error: writeError,
     isPending: isLoading,
     isSuccess,
@@ -69,10 +60,14 @@ export default function Offset() {
   }, [isConnected, chain?.id, switchChainAsync]);
 
   const handleWrite = async () => {
-    if (!simulateData?.request) return;
-
     try {
-      await write(simulateData.request);
+      await writeContract({
+        address: CONTRACT_ADDRESS,
+        abi: ABI,
+        functionName: "autoOffsetExactInToken",
+        args: [fromToken, poolToken, amountToSwap],
+        chainId: polygon.id,
+      });
     } catch (error) {
       console.error("Failed to write contract", error);
     }
@@ -85,18 +80,13 @@ export default function Offset() {
           <button
             onClick={handleWrite}
             className="bg-blue-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-700 disabled:bg-gray-400"
-            disabled={
-              !simulateData?.request ||
-              isLoading ||
-              !!prepareError ||
-              chain?.id !== polygon.id
-            }
+            disabled={isLoading || chain?.id !== polygon.id}
           >
             {isLoading ? "processing..." : "offset carbon (polygon)"}
           </button>
-          {isSuccess && data && (
+          {isSuccess && hash && (
             <a
-              href={`https://polygonscan.com/tx/${data}`}
+              href={`https://polygonscan.com/tx/${hash}`}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-blue-300 text-white px-4 ml-1 py-2 rounded-2xl hover:bg-blue-700"
@@ -104,9 +94,9 @@ export default function Offset() {
               See TX
             </a>
           )}
-          {(prepareError || writeError) && (
+          {writeError && (
             <div style={{ color: "red" }}>
-              Error: {(prepareError || (writeError as BaseError))?.message}
+              Error: {(writeError as BaseError)?.message}
             </div>
           )}
         </>
