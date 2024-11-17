@@ -14,7 +14,7 @@ export default function Complete() {
       />
       <div className="flex flex-col justify-center items-center px-3 py-2 gap-5">
         <div className="justify-center text-center items-center font-bold leading-relaxed text-colors-secondary text-3xl backdrop-blur-md">
-          Please Check The Completion of transaction
+          Please Check The Completion of Transaction
         </div>
         <div className="flex flex-shrink-0 items-center pb-5">
           <Image
@@ -26,11 +26,20 @@ export default function Complete() {
         </div>
         <Link
           href="https://testnet-scan.sign.global/schema/onchain_evm_84532_0x4b5"
-          className="bg-colors-secondaryButton rounded-md p-4 w-full text-white text-center font-bold text-lg"
+          className="bg-colors-secondaryButton rounded-md p-2 w-full text-white text-center font-bold text-lg"
           target="_blank"
           rel="noopener noreferrer"
         >
           Check Sign Protocol Attestation
+        </Link>
+
+        <Link
+          href="https://base-sepolia.blockscout.com/address/0xec28980605615954f48338c68a5623fd748065cc#code"
+          className="bg-colors-secondaryButton rounded-md p-2 w-full text-white text-center font-bold text-lg"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Check Blockscout Explore
         </Link>
       </div>
     </div>
